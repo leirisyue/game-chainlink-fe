@@ -27,6 +27,10 @@ export const routes: Routes = [{
       loadChildren: () => import('./system/system.module').then(m => m.SystemModule),
     },
     {
+      path: 'user',
+      loadChildren: () => import('./user/user.module').then(m => m.UserModule),
+    },
+    {
       path: 'endpoint',
       loadChildren: () => import('./endpoint/endpoint.module').then(m => m.EndpointModule),
     },

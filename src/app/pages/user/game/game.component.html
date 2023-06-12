@@ -1,0 +1,12 @@
+<div>
+	<button mat-mini-fab aria-label="reset" (click)="resetWheel()" >
+          <mat-icon>refresh</mat-icon>
+        </button>
+</div>
+<div style="display: flex; justify-content: center; align-items: center">
+	<ngx-wheel [options]="dataService.option | async"></ngx-wheel>
+</div>
+<div>
+	<ngx-clip-text></ngx-clip-text>
+</div>
+<ngx-options></ngx-options>
