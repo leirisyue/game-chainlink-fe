@@ -1,0 +1,60 @@
+/*!
+ * Copyright (c) Akveo 2019. All Rights Reserved.
+ * Licensed under the Single Application / Multi Application License.
+ * See LICENSE_SINGLE_APP / LICENSE_MULTI_APP in the 'docs' folder for license information on type of purchased license.
+ */
+
+@import '../@theme/styles/themes';
+
+@include nb-install-component() {
+  ::ng-deep router-outlet+* {
+    display: block;
+    animation: fade 1s;
+
+    @keyframes fade {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.fk-formfil {
+  ::ng-deep {
+    .mat-form-field-wrapper {
+      padding-bottom: 0 !important;
+    }
+    .mat-form-field-infix{
+      padding-bottom: 5px !important;
+      padding-left: 2px;
+    }
+    .mat-form-field-appearance-fill .mat-form-field-infix {
+      padding-top:0 !important;
+      padding-right: 0 !important;
+      padding-bottom: 7px !important;
+      padding-left: 5px !important;
+    }
+    .mat-form-field-appearance-fill .mat-form-field-flex{
+      background-color:  #F7F9FC !important;
+    }
+    .mat-form-field-appearance-fill .mat-form-field-underline::before{
+      display: none !important;
+    }
+    .mat-form-field-flex:hover .mat-form-field-underline::before{
+      display: none !important;
+    }
+    .mat-form-field-underline{
+      display: none !important;
+    }
+    .mat-form-field-wrapper{
+      border: 1px solid var(--input-basic-border-color);
+      border-radius: var(--input-rectangle-border-radius);
+    }
+    .mat-form-field-appearance-fill .mat-form-field-flex{
+      padding: 0;
+    }
+  }
+}

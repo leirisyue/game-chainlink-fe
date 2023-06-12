@@ -1,0 +1,95 @@
+<form #form="ngForm" (ngSubmit)="submit(form.value)">
+   <nb-card class="modal-lg">
+      <nb-card-header>
+         <h5 class="primary">{{data?.id ? ('Button.Update' | translate) : ('Button.Create' | translate)}}
+            updateUserAuthenticator</h5>
+      </nb-card-header>
+      <nb-card-body>
+         <div class="row">
+            <div class="form-group col-sm-12">
+               <label class="label">{{'User.nameDriver' | translate}} *</label>
+               <input nbInput fullWidth [(ngModel)]="data.name" name="name" #name="ngModel" >
+            </div>
+            <!-- <div class="form-group col-sm-12">
+               <label class="label">{{'User.credentialId' | translate}} </label>
+               <input nbInput fullWidth value="{{data.credentialId}}" name="credentialId" readonly>
+            </div>
+            <div class="form-group col-sm-12">
+               <label class="label">{{'User.aaguid' | translate}} </label>
+               <input nbInput fullWidth value="{{data.aaguid}}" name="aaguid" readonly>
+            </div>
+            <div class="form-group col-sm-12">
+               <label class="label">{{'User.coseKey' | translate}} </label>
+               <input nbInput fullWidth value="{{data.coseKey}}" name="coseKey" readonly>
+            </div>
+            <div class="form-group col-sm-12">
+               <label class="label">{{'User.attestationFormat' | translate}} </label>
+               <input nbInput fullWidth value="{{data.attestationFormat}}" name="attestationFormat" readonly>
+            </div>
+            <div class="form-group col-sm-12">
+               <label class="label">{{'User.authenticatorTransports' | translate}} </label>
+               <input nbInput fullWidth value="{{data.authenticatorTransports}}" name="authenticatorTransports"
+                  readonly>
+            </div>
+            <div class="form-group col-sm-12">
+               <label class="label">{{'Date.createdDate' | translate}} </label>
+               <input nbInput fullWidth value="{{data.createdDate}}" name="createdDate" readonly>
+            </div> -->
+            <div class="col-sm-12">
+
+               <div class="p-10-bottom">
+                  <div class="col-sm-12 p-0 m-0">
+                     <div class="col-sm-12 row p-0 m-0">
+                        <div class="details-border">
+                           <div class="col-sm-12 row pt-2 pb-2">
+                              <div class="col-md-3 col-sm-12 text-md-right ">{{'User.aaguid' | translate}}</div>
+                              <div class="col-md-9 col-sm-12">{{data.aaguid}}</div>
+                           </div>
+                           <mat-divider></mat-divider>
+                           <div class="col-sm-12 row pt-2 pb-2">
+                              <div class="col-md-3 col-sm-12 text-md-right ">{{'User.coseKey' | translate}} </div>
+                              <div class="col-md-9 col-sm-12" style="line-break: anywhere;">{{data.coseKey}}</div>
+                           </div>
+                           <mat-divider></mat-divider>
+                           <div class="col-sm-12 row pt-2 pb-2">
+                              <div class="col-md-3 col-sm-12 text-md-right ">{{'User.counter' | translate}} </div>
+                              <div class="col-md-9 col-sm-12">{{data.counter}}</div>
+                           </div>
+                           <mat-divider></mat-divider>
+                           <div class="col-sm-12 row pt-2 pb-2">
+                              <div class="col-md-3 col-sm-12 text-md-right ">{{'User.credentialId' | translate}} </div>
+                              <div class="col-md-9 col-sm-12">{{data.credentialId}}</div>
+                           </div>
+                           <mat-divider></mat-divider>
+                           <div class="col-sm-12 row pt-2 pb-2">
+                              <div class="col-md-3 col-sm-12 text-md-right ">{{'User.attestationFormat' | translate}}</div>
+                              <div class="col-md-9 col-sm-12">{{data.format}}</div>
+                           </div>
+                           <mat-divider></mat-divider>
+                           <div class="col-sm-12 row pt-2 pb-2">
+                              <div class="col-md-3 col-sm-12 text-md-right ">{{'Date.lastAccess' | translate}}</div>
+                              <div class="col-md-9 col-sm-12">{{data.lastAccess}}</div>
+                           </div>
+                           <mat-divider></mat-divider>
+                           <div class="col-sm-12 row pt-2 pb-2">
+                              <div class="col-md-3 col-sm-12 text-md-right ">{{'Date.createdDate' | translate}} </div>
+                              <div class="col-md-9 col-sm-12">{{data.createdDate}}</div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+
+            </div>
+
+
+         </div>
+      </nb-card-body>
+      <nb-card-footer>
+         <button type="submit" nbButton hero class="float-right ml-2" status="primary" [disabled]="">{{'Button.Save' |
+            translate}}</button>
+         <button type="button" nbButton class="float-right" (click)="close()">{{'Button.Close' | translate}}</button>
+      </nb-card-footer>
+   </nb-card>
+</form>

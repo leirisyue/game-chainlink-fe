@@ -1,0 +1,40 @@
+.avatar {
+   transition: 0.5s ease;
+   backface-visibility: hidden;
+   height: 80px;
+   width: 80px;
+}
+.avatar-profile {
+   transition: 0.5s ease;
+   backface-visibility: hidden;
+   height: 180px;
+   width: 180px;
+}
+.avatarItem {
+   transition: 0.5s ease;
+   backface-visibility: hidden;
+   height: 30px;
+   width: 30px;
+}
+
+.avatarBar {
+   transition: 0.5s ease;
+   backface-visibility: hidden;
+   height: 40px;
+   width: 40px;
+}
+
+.bg-color {
+   height: 60%;
+   width: 100%;
+   top: 0;
+   left: 0;
+   right: 0;
+   background-color: var(--menu-item-active-text-color);
+   color: var(--text-basic-color);
+   font-weight: 600;
+}
+
+.text-color-profile {
+   color: black !important;
+}

@@ -1,0 +1,35 @@
+<!-- <h3 id="title" class="title">{{'Button.Register' | translate}}</h3>
+
+<div aria-labelledby="title">
+  <h6>Thông tin cơ sở kinh doanh</h6>
+
+</div> -->
+
+<nb-card>
+  <nb-card-header>
+    <div class="col-sm-12">
+      <div class="row align-items-center">
+        <h3 class="text-uppercase">{{'Button.Register' | translate}}</h3>
+        <!-- <i class="fa fa fa-info-circle fs-13" *ngIf="_tab === 0"
+          nbTooltip="(Chọn từ ngày đến ngày) Liệt kê thời gian đăng nhập/đăng xuất trên hệ thống"></i> -->
+        <!-- <i class="fa fa fa-info-circle fs-13" *ngIf="_tab === 1"
+          nbTooltip="(Chọn từ ngày đến ngày) Liệt kê thời gian thực hiện các thao tác khác trên hệ thống"></i> -->
+      </div>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <div>
+      <nb-tabset fullWidth (changeTab)="changeTab($event)">
+        <nb-tab [tabId]="0" tabTitle="{{'Thông tin cơ sở kinh doanh' | translate}}"></nb-tab>
+        <nb-tab [tabId]="1" tabTitle="{{'Tài khoản nhân viên' | translate}}"></nb-tab>
+      </nb-tabset>
+    </div>
+    <span *ngIf="isBusiness">
+      <ngx-register-business></ngx-register-business>
+    </span>
+    <span *ngIf="isUser">
+      <ngx-register-user></ngx-register-user>
+    </span>
+  </nb-card-body>
+
+</nb-card>

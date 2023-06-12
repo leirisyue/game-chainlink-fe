@@ -1,0 +1,117 @@
+<div [formGroup]="registerForm" class="col-sm-12">
+   <div class="row">
+
+      <div class="form-control-group my-1 col-sm-8">
+         <label class="label" for="input-name">Tên cơ sở kinh doanh *</label>
+         <input nbInput autofocus fullWidth id="input-name" formControlName="companyName"
+            [status]="company.dirty ? (company.invalid  ? 'danger' : 'success') : 'basic'"
+            [attr.aria-invalid]="company.invalid && company.touched ? true : null">
+         <ngx-validation-message label="Tên cơ sở kinh doanh"
+            [showMaxLength]="company?.hasError('maxlength') && company.touched" [maxLength]="32"
+            [showRequired]="company?.errors?.required && company.touched">
+         </ngx-validation-message>
+      </div>
+
+      <div class="form-control-group my-1 col-sm-4">
+         <label class="label" for="input-name">{{'Global.TaxCode' | translate}} *</label>
+         <input nbInput autofocus fullWidth pattern="^[0-9\-]{10,14}$" id="input-name" formControlName="companyTaxCode"
+            (keydown)="isTaxCode($event.keyCode, $event.ctrlKey, $event.altKey, $event.shiftKey)"
+            [status]="taxCode.dirty ? (taxCode.invalid  ? 'danger' : 'success') : 'basic'"
+            [attr.aria-invalid]="taxCode.invalid && taxCode.touched ? true : null" maxlength="14" minlength="10">
+         <ngx-validation-message label="{{'Global.TaxCode' | translate}}"
+            [showMinLength]="taxCode?.hasError('minlength') && taxCode.touched" [minLength]="10"
+            [showPattern]="!taxCode?.hasError('minlength') && taxCode?.errors?.pattern && taxCode.touched"
+            [showRequired]="taxCode?.errors?.required && taxCode.touched">
+         </ngx-validation-message>
+      </div>
+
+      <div class="form-control-group my-1 col-sm-12">
+         <label class="label" for="input-name">{{'Global.Address' | translate}} *</label>
+         <input nbInput autofocus fullWidth id="input-name" formControlName="companyAddress"
+            [status]="companyAddress.dirty ? (companyAddress.invalid  ? 'danger' : 'success') : 'basic'"
+            [attr.aria-invalid]="companyAddress.invalid && companyAddress.touched ? true : null" maxlength="200">
+         <ngx-validation-message label="{{'Global.Address' | translate}}"
+            [showRequired]="companyAddress?.errors?.required && companyAddress.touched">
+         </ngx-validation-message>
+      </div>
+
+      <div class="form-control-group my-1 col-sm-8">
+         <label class="label" for="input-name">{{'By.Representative' | translate}} *</label>
+         <input nbInput autofocus fullWidth id="input-name" formControlName="representative"
+            [status]="representative.dirty ? (representative.invalid  ? 'danger' : 'success') : 'basic'"
+            [attr.aria-invalid]="representative.invalid && representative.touched ? true : null" maxlength="200">
+         <ngx-validation-message label="{{'By.Representative' | translate}}"
+            [showRequired]="representative?.errors?.required && representative.touched">
+         </ngx-validation-message>
+      </div>
+
+      <div class="form-control-group my-1 col-sm-4">
+         <label class="label" for="input-name">Số điện thoại *</label>
+         <input nbInput autofocus fullWidth id="input-name" type="text" pattern="^[0-9\-\+]{0,11}$"
+            formControlName="companyPhone"
+            (keydown)="isNumberKey($event.keyCode, $event.ctrlKey, $event.altKey, $event.shiftKey)"
+            [status]="companyPhone.dirty ? (companyPhone.invalid  ? 'danger' : 'success') : 'basic'"
+            [attr.aria-invalid]="companyPhone.invalid && companyPhone.touched ? true : null" maxlength="11"
+            minlength="10">
+         <ngx-validation-message label="Số điện thoại"
+            [showMinLength]="companyPhone?.hasError('minlength') && companyPhone.touched" [minLength]="10"
+            [showPattern]="companyPhone?.errors?.pattern && companyPhone.touched"
+            [showRequired]="companyPhone?.errors?.required && companyPhone.touched">
+         </ngx-validation-message>
+      </div>
+   </div>
+
+   <hr>
+
+   <h6>Tài khoản đăng nhập</h6>
+
+   <div class="row">
+      <div class="form-control-group my-1 col-sm-6">
+         <label class="label" for="input-name">{{'Global.FullName' | translate}} *</label>
+         <input nbInput autofocus fullWidth id="input-name" formControlName="userFullName"
+            [status]="fullName.dirty ? (fullName.invalid  ? 'danger' : 'success') : 'basic'"
+            [attr.aria-invalid]="fullName.invalid && fullName.touched ? true : null">
+         <ngx-validation-message label="{{'Global.FullName' | translate}}"
+            [showMaxLength]="fullName?.hasError('maxlength') && fullName.touched" [maxLength]="32"
+            [showRequired]="fullName?.errors?.required && fullName.touched">
+         </ngx-validation-message>
+      </div>
+      <div class="form-control-group my-1 col-sm-6">
+         <label class="label" for="input-email">Email *</label>
+         <input nbInput fullWidth id="input-email" formControlName="userEmail"
+            [status]="email.dirty ? (email.invalid  ? 'danger' : 'success') : 'basic'"
+            [attr.aria-invalid]="email.invalid && email.touched ? true : null" type="email"
+            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+         <ngx-validation-message label="Email" [showPattern]="email?.errors?.pattern && email.touched"
+            [showRequired]="email?.errors?.required && email.touched">
+         </ngx-validation-message>
+      </div>
+      <div class="col-sm-12">
+         <button nbButton fullWidth status="primary" size="large" [disabled]="!registerForm.valid" class="my-1"
+            (click)="register()">
+            {{'Button.Register' | translate}}
+         </button>
+      </div>
+   </div>
+</div>
+<!-- <section *ngIf="socialLinks && socialLinks.length > 0" class="links" aria-label="Social sign in">
+   or enter with:
+   <div class="socials">
+      <ng-container *ngFor="let socialLink of socialLinks">
+         <a *ngIf="socialLink.link" [routerLink]="socialLink.link" [attr.target]="socialLink.target"
+            [attr.class]="socialLink.icon" [class.with-icon]="socialLink.icon">
+            <nb-icon *ngIf="socialLink.icon; else title" [icon]="socialLink.icon"></nb-icon>
+            <ng-template #title>{{ socialLink.title }}</ng-template>
+         </a>
+         <a *ngIf="socialLink.url" [attr.href]="socialLink.url" [attr.target]="socialLink.target"
+            [attr.class]="socialLink.icon" [class.with-icon]="socialLink.icon">
+            <nb-icon *ngIf="socialLink.icon; else title" [icon]="socialLink.icon"></nb-icon>
+            <ng-template #title>{{ socialLink.title }}</ng-template>
+         </a>
+      </ng-container>
+   </div>
+</section> -->
+
+<section class="another-action my-1 col-sm-12" aria-label="Sign in">
+   Bạn đã có tài khoản? <a class="text-link" routerLink="../login">{{'Button.SignIn' | translate}}</a>
+</section>

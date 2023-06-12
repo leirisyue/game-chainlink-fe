@@ -1,0 +1,47 @@
+<form #form="ngForm" (ngSubmit)="submit(form.value)">
+   <nb-card class="modal-lg">
+      <nb-card-header>
+         <h5 class="primary">{{data?.id ? ('Button.Update' | translate) : ('Button.Create' | translate)}}
+            Người dùng</h5>
+      </nb-card-header>
+      <nb-card-body>
+         <div class="row">
+            <div class="form-group col-sm-12">
+               <label class="label">{{'Global.userLogin' | translate}} </label>
+               <input nbInput fullWidth [(ngModel)]="dataInput.username" name="username" #username="ngModel">
+               <ngx-validation-message label="{{'Global.userLogin' | translate}}"
+                  [showRequired]="username?.errors?.required && username.touched">
+               </ngx-validation-message>
+            </div>
+            <div class="form-group col-sm-12">
+               <label class="label">{{'Global.Password' | translate}} </label>
+               <nb-form-field>
+                  <input [type]="getInputType()" nbInput fullWidth id="input-password" [(ngModel)]="dataInput.password"
+                     name="password" #password="ngModel"
+                     [status]="password.dirty ? (password.invalid  ? 'danger' : 'success') : 'basic'">
+                  <button nbSuffix nbButton ghost (click)="toggleShowPassword()" type="button">
+                     <nb-icon [icon]="showPassword ? 'eye-outline' : 'eye-off-2-outline'" pack="eva"
+                        [attr.aria-label]="showPassword ? 'hide password' : 'show password'">
+                     </nb-icon>
+                  </button>
+               </nb-form-field>
+               <ngx-validation-message label="{{'Global.Password' | translate}}"
+                  [showRequired]="password?.errors?.required && password.touched">
+               </ngx-validation-message>
+            </div>
+            <div class="form-group col-sm-12">
+               <label class="label">{{'Global.displayName' | translate}} </label>
+               <input nbInput fullWidth [(ngModel)]="dataInput.displayName" name="displayName" #displayName="ngModel">
+               <ngx-validation-message label="{{'Global.displayName' | translate}}"
+                  [showRequired]="displayName?.errors?.required && displayName.touched">
+               </ngx-validation-message>
+            </div>
+         </div>
+      </nb-card-body>
+      <nb-card-footer>
+         <button type="submit" nbButton hero class="float-right ml-2" status="primary" [disabled]="">{{'Button.Save' |
+            translate}}</button>
+         <button type="button" nbButton class="float-right" (click)="close()">{{'Button.Close' | translate}}</button>
+      </nb-card-footer>
+   </nb-card>
+</form>

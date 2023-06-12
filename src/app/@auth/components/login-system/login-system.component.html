@@ -1,0 +1,60 @@
+<h3 id="title" class="title">{{'Button.SignIn' | translate}}</h3>
+<!-- <p class="sub-title">Hello! Log in with your email.</p> -->
+
+<!-- <nb-alert *ngIf="showMessages.error && errors?.length && !submitted" outline="danger" role="alert">
+  <p class="alert-title"><b>Oh snap!</b></p>
+  <ul class="alert-message-list">
+    <li *ngFor="let error of errors" class="alert-message">{{ error }}</li>
+  </ul>
+</nb-alert> -->
+
+<!-- <nb-alert *ngIf="showMessages.success && messages?.length && !submitted" outline="success" role="alert">
+  <p class="alert-title"><b>Hooray!</b></p>
+  <ul class="alert-message-list">
+    <li *ngFor="let message of messages" class="alert-message">{{ message }}</li>
+  </ul>
+</nb-alert> -->
+
+<form [formGroup]="loginForm" (ngSubmit)="startLogin()">
+  <div class="form-control-group my-3">
+    <label class="label" for="input-email">{{'Global.UserName' | translate}}</label>
+    <input nbInput fullWidth id="input-account" formControlName="account"
+      [status]="account.dirty ? (account.invalid  ? 'danger' : 'success') : 'basic'"
+      [attr.aria-invalid]="account.invalid && account.touched ? true : null">
+    <ngx-validation-message label="{{'Global.UserName' | translate}}"
+      [showPattern]="account?.hasError('pattern') && account.touched"
+      [showRequired]="account?.errors?.required && account.touched"></ngx-validation-message>
+  </div>
+
+  <div class="form-control-group my-3">
+    <label class="label" for="input-password">{{'Global.Password' | translate}}</label>
+    <nb-form-field>
+      <input [type]="getInputType()" nbInput fullWidth id="input-password" formControlName="password"
+        [status]="password.dirty ? (password.invalid  ? 'danger' : 'success') : 'basic'">
+      <button nbSuffix nbButton ghost (click)="toggleShowPassword()" type="button">
+        <nb-icon [icon]="showPassword ? 'eye-outline' : 'eye-off-2-outline'" pack="eva"
+          [attr.aria-label]="showPassword ? 'hide password' : 'show password'">
+        </nb-icon>
+      </button>
+    </nb-form-field>
+    <ngx-validation-message label="{{'Global.Password' | translate}}"
+      [showMinLength]="password?.hasError('minlength') && password.touched"
+      [showMaxLength]="password?.hasError('maxlength') && password.touched"
+      [showRequired]="password?.errors?.required && password.touched" [minLength]="minLength" [maxLength]="maxLength">
+    </ngx-validation-message>
+  </div>
+
+  <div class="form-control-group accept-group my-3">
+    <nb-checkbox formControlName="remember" name="remember" >{{'Button.RememberLogin' |
+      translate}}</nb-checkbox>
+    <!-- <p class="float-right fs-13"><a class="text-link" routerLink="../request-password">Quên mật khẩu?</a></p> -->
+  </div>
+
+  <button nbButton type="submit" fullWidth status="primary" size="large" class="my-3" [disabled]="!loginForm.valid">
+    {{'Button.SignIn' | translate}}
+  </button>
+</form>
+
+<!-- <section class="another-action my-3" aria-label="Register">
+  Bạn chưa có tài khoản? <a class="text-link" routerLink="../register">Đăng ký</a>
+</section> -->

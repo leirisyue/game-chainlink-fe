@@ -1,0 +1,24 @@
+<div class="font-router">
+   <a class="router-link" [ngClass]="{'text-router' : configService.breadcrumb.url1 === null || configService.breadcrumb.url1 === undefined}"
+      [routerLink]="configService.breadcrumb.url1">{{configService.breadcrumb.title1}}</a>
+
+   <span *ngIf="configService.breadcrumb.title2">&ensp;/&ensp;</span>
+   <a class="router-link"  [ngClass]="{'text-router' : configService.breadcrumb.url2 === null}"
+      [routerLink]="configService.breadcrumb.url2">{{configService.breadcrumb.title2}}</a>
+
+   <span *ngIf="configService.breadcrumb.title3">&ensp;/&ensp;</span>
+   <a class="router-link"  [ngClass]="{'text-router' : configService.breadcrumb.url3 === null}"
+      [routerLink]="configService.breadcrumb.url3">{{configService.breadcrumb.title3}}</a>
+
+   <span *ngIf="configService.breadcrumb.title4">&ensp;/&ensp;</span>
+   <a class="router-link"  [ngClass]="{'text-router' : configService.breadcrumb.url4 === null}"
+      [routerLink]="configService.breadcrumb.url4">{{configService.breadcrumb.title4}}</a>
+
+   <span *ngIf="configService.breadcrumb.title5">&ensp;/&ensp;</span>
+   <a class="router-link"  [ngClass]="{'text-router' : configService.breadcrumb.url5 === null}"
+      [routerLink]="configService.breadcrumb.url5">{{configService.breadcrumb.title5}}</a>
+
+   <span *ngIf="configService.breadcrumb.title6">&ensp;/&ensp;</span>
+   <a class="router-link"  [ngClass]="{'text-router' : configService.breadcrumb.url6 === null}"
+      [routerLink]="configService.breadcrumb.url6">{{configService.breadcrumb.title6}}</a>
+</div>

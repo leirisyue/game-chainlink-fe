@@ -1,0 +1,17 @@
+<div class="header-container">
+  <div class="logo-container">
+    <a (click)="toggleSidebar()" href="#" class="sidebar-toggle">
+      <nb-icon icon="menu-2-outline"></nb-icon>
+    </a>
+    <a class="logo" href="pages/dashboard"><b>{{projectName}}</b></a>
+  </div>
+</div>
+
+<div class="header-container">
+  <nb-actions size="small" nbTooltip="Đăng xuất">
+    <!-- <nb-action class="control-item" icon="bell-outline"></nb-action> -->
+    <nb-action >
+      <nb-icon icon="cloud-download-outline" class="color-btn-logout" (click)="logout()"></nb-icon>
+    </nb-action>
+  </nb-actions>
+</div>

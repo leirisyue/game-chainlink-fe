@@ -1,0 +1,47 @@
+<h3 id="title" class="title">{{'Button.SignIn' | translate}}</h3>
+
+<form [formGroup]="loginForm" (ngSubmit)="startLogin()">
+  <div class="form-control-group my-3">
+    <label class="label" for="input-email">clientId</label>
+    <input nbInput fullWidth id="input-account" formControlName="clientId"
+      [status]="clientId.dirty ? (clientId.invalid  ? 'danger' : 'success') : 'basic'"
+      [attr.aria-invalid]="clientId.invalid && clientId.touched ? true : null">
+    <ngx-validation-message label="{{'Global.UserName' | translate}}"
+      [showPattern]="clientId?.hasError('pattern') && clientId.touched"
+      [showRequired]="clientId?.errors?.required && clientId.touched"></ngx-validation-message>
+  </div>
+
+  <div class="form-control-group my-3">
+    <label class="label" for="input-clientSecret">clientSecret</label>
+    <nb-form-field>
+      <input nbInput fullWidth id="input-clientSecret" formControlName="clientSecret"
+        [status]="clientSecret.dirty ? (clientSecret.invalid  ? 'danger' : 'success') : 'basic'"
+        [attr.aria-invalid]="clientSecret.invalid && clientSecret.touched ? true : null">
+    </nb-form-field>
+    <ngx-validation-message label="clientSecret"
+      [showPattern]="clientSecret?.hasError('pattern') && clientSecret.touched"
+      [showRequired]="clientSecret?.errors?.required && clientSecret.touched"></ngx-validation-message>
+  </div>
+
+  <div class="form-control-group my-3" hidden>
+    <label class="label" for="input-clientSecret">timeoutInSeconds</label>
+    <nb-form-field>
+      <input type="number" nbInput fullWidth id="input-clientSecret" formControlName="clientSecret"
+        [status]="clientSecret.dirty ? (clientSecret.invalid  ? 'danger' : 'success') : 'basic'"
+        [attr.aria-invalid]="clientSecret.invalid && clientSecret.touched ? true : null">
+    </nb-form-field>
+  </div>
+
+  <div class="form-control-group accept-group my-3">
+    <nb-checkbox formControlName="rememberMe" name="rememberMe">{{'Button.RememberLogin' |translate}}</nb-checkbox>
+  </div>
+
+  <button nbButton type="submit" fullWidth status="primary" size="large" class="my-3" [disabled]="!loginForm.valid">
+    {{'Button.SignIn' | translate}}
+  </button>
+</form>
+
+
+<!-- <section class="another-action my-3" aria-label="Register">
+  Bạn chưa có tài khoản? <a class="text-link" routerLink="../register">Đăng ký</a>
+</section> -->

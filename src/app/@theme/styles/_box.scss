@@ -1,0 +1,83 @@
+:root {
+   --main-color: #1189D7;
+}
+
+.serviceBox {
+   font-family: 'Poppins', sans-serif;
+   text-align: center;
+   padding: 25px 15px;
+   margin: 0 15px;
+   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+   position: relative;
+   z-index: 1;
+   background: white;
+}
+
+.serviceBox:before,
+.serviceBox:after {
+   content: "";
+   background-color: var(--main-color);
+   height: 100%;
+   width: 15px;
+   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+   position: absolute;
+   left: -15px;
+   top: 0;
+   z-index: -1;
+   clip-path: polygon(100% 0, 100% 100%, 0 76%);
+}
+
+.serviceBox:after {
+   transform: rotateY(180deg);
+   left: auto;
+   right: -15px;
+}
+
+.serviceBox .service-icon {
+   color: var(--main-color);
+   font-size: 40px;
+   margin: 0 0 20px;
+}
+
+.serviceBox .title {
+   font-size: 18px;
+   font-weight: 600;
+   text-transform: capitalize;
+   letter-spacing: 0.5px;
+   margin: 0 0 10px;
+}
+
+.serviceBox .description {
+   font-size: 13px;
+   font-weight: 300;
+   line-height: 22px;
+   letter-spacing: 0.5px;
+   text-align: center;
+   margin: 0;
+}
+
+.serviceBox.orange {
+   --main-color: #f36d44;
+}
+
+.serviceBox.yellow {
+   --main-color: #FDA111;
+}
+
+.serviceBox.green {
+   --main-color: #7DB000;
+}
+
+.serviceBox.blue {
+   --main-color: #44c1f3;
+}
+
+.serviceBox.purple {
+   --main-color: #6a44f3;
+}
+
+@media only screen and (max-width: 1199px) {
+   .serviceBox {
+      margin: 0 15px 30px;
+   }
+}

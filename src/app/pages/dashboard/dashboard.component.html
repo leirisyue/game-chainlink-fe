@@ -1,0 +1,270 @@
+<!-- ---------------------------------------- dashboard works ------------------------------------------------->
+<span *ngIf="authService.subject === role.SYSTEM">
+   <div class="container text-center">
+      <div class="row">
+         <div class="col-md-4 col-sm-6 pt-3">
+            <div class="serviceBox green">
+               <div class="service-icon">
+                  <span><i class="fa fa-globe"></i></span>
+               </div>
+               <h3 class="title">{{'packages.userAuthenticators'|translate}}</h3>
+               <span class="description">
+                  <h3>{{systemUsageDto.userAuthenticators}}</h3>
+               </span>
+            </div>
+         </div>
+         <div class="col-md-4 col-sm-6 pt-3">
+            <div class="serviceBox yellow">
+               <div class="service-icon">
+                  <span><i class="fa fa-edit"></i></span>
+               </div>
+               <h3 class="title">{{'packages.createdPackages'|translate}}</h3>
+               <span class="description">
+                  <h3>{{systemUsageDto.createdPackages}}</h3>
+               </span>
+            </div>
+         </div>
+         <div class="col-md-4 col-sm-6 pt-3">
+            <div class="serviceBox purple">
+               <div class="service-icon">
+                  <span><i class="fa fa-cube"></i></span>
+               </div>
+               <h3 class="title">{{'packages.relyingParties'|translate}}</h3>
+               <span class="description">
+                  <h3>{{systemUsageDto.relyingParties}}</h3>
+               </span>
+            </div>
+         </div>
+         <div class="col-md-4 col-sm-6 pt-3">
+            <div class="serviceBox blue">
+               <div class="service-icon">
+                  <span><i class="fa fa-user"></i></span>
+               </div>
+               <h3 class="title">{{'packages.userAccounts'|translate}}</h3>
+               <span class="description">
+                  <h3>{{systemUsageDto.userAccounts}}</h3>
+               </span>
+            </div>
+         </div>
+
+         <div class="col-md-4 col-sm-6 pt-3">
+            <div class="serviceBox orange">
+               <div class="service-icon">
+                  <span><i class="fa fa-check"></i></span>
+               </div>
+               <h3 class="title">{{'packages.activatedPackages'|translate}}</h3>
+               <span class="description">
+                  <h3>{{systemUsageDto.activatedPackages}}</h3>
+               </span>
+            </div>
+         </div>
+      </div>
+   </div>
+</span>
+<!-- ------------------------------------------ system works -------------------------------------------------->
+<p *ngIf="authService.subject !== role.SYSTEM">
+   <nb-card>
+      <nb-card-header>
+         <div class="col-sm-12">
+            <div class="row align-items-center ">
+               <h6 class="flex-1 text-uppercase">
+                  {{'packages.relyingparty' |translate}}
+               </h6>
+               <div>
+                  <button nbButton hero status="primary" (click)="openForm()">{{'Button.Update' | translate}}</button>
+               </div>
+            </div>
+         </div>
+      </nb-card-header>
+      <nb-card-body>
+         <div class="col-sm-12 pb-3">
+            <div class="row">
+               <div class="form-group col-sm-6">
+                  <label class="label">{{'relying.ID' | translate}}</label>
+                  <nb-form-field>
+                     <input [type]="getInputType()" nbInput fullWidth value="{{relyingParty?.id}}" readonly>
+                     <button nbSuffix nbButton ghost (click)="toggleShowPassword()" type="button">
+                        <nb-icon [icon]="showPassword ? 'eye-outline' : 'eye-off-2-outline'" pack="eva"
+                           [attr.aria-label]="showPassword ? 'hide password' : 'show password'">
+                        </nb-icon>
+                     </button>
+                  </nb-form-field>
+               </div>
+
+               <div class="form-group col-sm-6">
+                  <label class="label">{{'relying.secret' | translate}}</label>
+                  <nb-form-field>
+                     <input [type]="getInputType()" nbInput fullWidth value="{{relyingParty?.secret}}" readonly>
+                     <button nbSuffix nbButton ghost (click)="toggleShowPassword()" type="button">
+                        <nb-icon [icon]="showPassword ? 'eye-outline' : 'eye-off-2-outline'" pack="eva"
+                           [attr.aria-label]="showPassword ? 'hide password' : 'show password'">
+                        </nb-icon>
+                     </button>
+                  </nb-form-field>
+               </div>
+               <div class="form-group col-sm-6">
+                  <label class="label">{{'Global.Name' | translate}}</label>
+                  <input nbInput fullWidth value="{{relyingParty?.name}}" readonly>
+               </div>
+               <div class="form-group col-sm-6">
+                  <label class="label">{{'relying.origin' | translate}}</label>
+                  <input nbInput fullWidth value="{{relyingParty?.origin}}" readonly>
+               </div>
+
+               <div class="form-group col-sm-6">
+                  <label class="label">{{'relying.ports' | translate}}</label>
+                  <input nbInput fullWidth value="{{listPort}}" readonly>
+               </div>
+               <div class="form-group col-sm-6">
+                  <label class="label">{{'relying.subdomains' | translate}}</label>
+                  <input nbInput fullWidth value="{{listSub}}" readonly>
+               </div>
+               <div class="form-group col-sm-12" hidden>
+                  <label class="label">{{'Global.Description' | translate}}</label>
+                  <textarea nbInput fullWidth readonly value="{{relyingParty?.description}}"></textarea>
+               </div>
+            </div>
+         </div>
+      </nb-card-body>
+   </nb-card>
+   <nb-card>
+      <nb-card-header>
+         <div class="col-sm-12">
+            <div class="row align-items-center ">
+               <h6 class="flex-1 text-uppercase">
+                  {{'packages.packagesTable' | translate}}
+               </h6>
+            </div>
+         </div>
+      </nb-card-header>
+      <nb-card-body>
+         <div class="col-sm-12 pb-3">
+            <div class="row" *ngIf="servicePackageDto?.user?.totalQuantity">
+               <div class="col-sm-12 title">
+                  <h6>{{'packages.packagesUser' |translate}}</h6>
+               </div>
+               <div class="form-group col-sm-4">
+                  <label class="label">{{'packages.totalQuantity' | translate}}</label>
+                  <input nbInput fullWidth value="{{servicePackageDto?.user?.totalQuantity | separator}}" readonly>
+               </div>
+               <div class="form-group col-sm-4">
+                  <label class="label">{{'packages.usedQuantity' | translate}}</label>
+                  <input nbInput fullWidth value="{{servicePackageDto?.user?.usedQuantity | separator}}" readonly>
+               </div>
+               <div class="form-group col-sm-4">
+                  <label class="label">{{'packages.freeQuantity' | translate}}</label>
+                  <input nbInput fullWidth value="{{servicePackageDto?.user?.freeQuantity | separator}}" readonly>
+               </div>
+            </div>
+            <div class="row" *ngIf="servicePackageDto?.subdomain?.totalQuantity">
+               <div class="col-sm-12 title">
+                  <h6>{{'packages.packagesSubdomain' |translate}}</h6>
+               </div>
+               <div class="form-group col-sm-4">
+                  <label class="label">{{'packages.totalQuantity' | translate}}</label>
+                  <input nbInput fullWidth value="{{servicePackageDto?.subdomain?.totalQuantity | separator}}" readonly>
+               </div>
+               <div class="form-group col-sm-4">
+                  <label class="label">{{'packages.usedQuantity' | translate}}</label>
+                  <input nbInput fullWidth value="{{servicePackageDto?.subdomain?.usedQuantity | separator}}" readonly>
+               </div>
+               <div class="form-group col-sm-4">
+                  <label class="label">{{'packages.freeQuantity' | translate}}</label>
+                  <input nbInput fullWidth value="{{servicePackageDto?.subdomain?.freeQuantity | separator}}" readonly>
+               </div>
+            </div>
+            <div class="row" *ngIf="servicePackageDto?.port?.totalQuantity">
+               <div class="col-sm-12 title">
+                  <h6>{{'packages.packagesPort' |translate}}</h6>
+               </div>
+               <div class="form-group col-sm-4">
+                  <label class="label">{{'packages.totalQuantity' | translate}}</label>
+                  <input nbInput fullWidth value="{{servicePackageDto?.port?.totalQuantity | separator}}" readonly>
+               </div>
+               <div class="form-group col-sm-4">
+                  <label class="label">{{'packages.usedQuantity' | translate}}</label>
+                  <input nbInput fullWidth value="{{servicePackageDto?.port?.usedQuantity | separator}}" readonly>
+               </div>
+               <div class="form-group col-sm-4">
+                  <label class="label">{{'packages.freeQuantity' | translate}}</label>
+                  <input nbInput fullWidth value="{{servicePackageDto?.port?.freeQuantity | separator}}" readonly>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-sm-12 title">
+                  <h6>{{'packages.packagesLicense' |translate}}</h6>
+               </div>
+               <div class="form-group col-sm-4">
+                  <label class="label">{{'Date.expiration' | translate}}</label>
+                  <input nbInput fullWidth value="{{servicePackageDto?.time?.expiration | date:'dd/MM/yyyy'}}" readonly>
+               </div>
+               <div class="form-group col-sm-4">
+                  <label class="label">{{'packages.remaining' | translate}}</label>
+                  <input nbInput fullWidth value="{{servicePackageDto?.time?.remaining | separator}}" readonly>
+               </div>
+            </div>
+         </div>
+         <div class="col-sm-12">
+            <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]" [pageSize]="10" class="float-right"
+               showFirstLastButtons>
+            </mat-paginator>
+            <div class="col-sm-6 gap-none">
+               <div class="row">
+                  <div class="form-group col-sm-6">
+                     <nb-form-field>
+                        <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
+                        <input nbInput status="primary" placeholder="{{'Global.Search' | translate}}"
+                           (keyup)="doFilter($event.target.value)">
+                     </nb-form-field>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="col-sm-12 gap-none">
+            <ng-scrollbar class="custom-scroll border-custom" #scrollable track="horizontal"
+               pointerEventsMethod="scrollbar" thumbClass="white-scrollbars">
+               <table id="matTable" [dataSource]="dataSource" mat-table matSort style="min-width: 1000px;">
+                  <ng-container matColumnDef="id">
+                     <th *matHeaderCellDef mat-header-cell mat-sort-header>STT</th>
+                     <td *matCellDef="let item; let i = index;" mat-cell>
+                        {{paginator.pageIndex * paginator.pageSize + i + 1}}
+                     </td>
+                  </ng-container>
+                  <ng-container matColumnDef="amount">
+                     <th *matHeaderCellDef mat-header-cell mat-sort-header>{{'packages.amount' | translate}}</th>
+                     <td *matCellDef="let item" mat-cell nbTooltip="{{item.amount}}">{{item.amount | separator}}
+                        <span *ngIf="item.type === 'TIME'">
+                           {{ 'packages.' +item?.typeLicense |translate}}
+                        </span>
+                     </td>
+                  </ng-container>
+                  <ng-container matColumnDef="type">
+                     <th *matHeaderCellDef mat-header-cell mat-sort-header>{{'Global.Type' | translate}}</th>
+                     <td *matCellDef="let item" mat-cell nbTooltip="{{item.type}}">{{item.type}}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="createdDate">
+                     <th *matHeaderCellDef mat-header-cell mat-sort-header>{{'Date.createdDate' | translate}}</th>
+                     <td *matCellDef="let item" mat-cell nbTooltip="{{item.createdDate | date:'dd/MM/yyyy'}}">
+                        {{item.createdDate | date:'dd/MM/yyyy'}}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="activatedDate">
+                     <th *matHeaderCellDef mat-header-cell mat-sort-header>{{'Date.activatedDate' |
+                        translate}}</th>
+                     <td *matCellDef="let item" mat-cell nbTooltip="{{item.activatedDate | date:'dd/MM/yyyy'}}">
+                        {{item.activatedDate | date:'dd/MM/yyyy'}}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="description">
+                     <th *matHeaderCellDef mat-header-cell mat-sort-header>{{'Global.Description' | translate}}</th>
+                     <td *matCellDef="let item" mat-cell nbTooltip="{{item.description}}">{{item.description}}</td>
+                  </ng-container>
+                  <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+                  <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
+               </table>
+            </ng-scrollbar>
+         </div>
+         <div class="text-center" *ngIf="dataSource.data.length < 1">
+            {{'Message.NoData' | translate}}
+         </div>
+      </nb-card-body>
+   </nb-card>
+</p>

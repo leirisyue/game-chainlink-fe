@@ -1,0 +1,44 @@
+<div [formGroup]="registerUserForm" class="col-sm-12">
+   <div class="row">
+
+      <div class="form-control-group my-1 col-sm-12">
+         <label class="label" for="input-name">{{'Họ và tên' | translate}} *</label>
+         <input nbInput autofocus fullWidth id="input-name" formControlName="userFullName"
+            [status]="userFullName.dirty ? (userFullName.invalid  ? 'danger' : 'success') : 'basic'"
+            [attr.aria-invalid]="userFullName.invalid && userFullName.touched ? true : null" maxlength="200">
+         <ngx-validation-message label="{{'Họ và tên' | translate}}"
+            [showRequired]="userFullName?.errors?.required && userFullName.touched">
+         </ngx-validation-message>
+      </div>
+      <div class="form-control-group my-1 col-sm-12">
+         <label class="label" for="input-email">Email *</label>
+         <input nbInput fullWidth id="input-email" formControlName="userEmail"
+            [status]="email.dirty ? (email.invalid  ? 'danger' : 'success') : 'basic'"
+            [attr.aria-invalid]="email.invalid && email.touched ? true : null" type="email"
+            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+         <ngx-validation-message label="Email" [showPattern]="email?.errors?.pattern && email.touched"
+            [showRequired]="email?.errors?.required && email.touched">
+         </ngx-validation-message>
+      </div>
+      <div class="form-control-group my-1 col-sm-12">
+         <label class="label" for="input-name">{{'Mã cơ sở kinh doanh' | translate}} *</label>
+         <input nbInput autofocus fullWidth id="input-name" formControlName="businessID"
+            [status]="businessID.dirty ? (businessID.invalid  ? 'danger' : 'success') : 'basic'"
+            [attr.aria-invalid]="businessID.invalid && businessID.touched ? true : null" maxlength="200">
+         <ngx-validation-message label="{{'Mã cơ sở kinh doanh' | translate}}"
+            [showRequired]="businessID?.errors?.required && businessID.touched">
+         </ngx-validation-message>
+      </div>
+      <div class="col-sm-12">
+         <button nbButton fullWidth status="primary" size="large" [disabled]="!registerUserForm.valid" class="my-1"
+            (click)="register()">
+            {{'Button.Register' | translate}}
+         </button>
+      </div>
+   </div>
+</div>
+
+
+<section class="another-action my-1 col-sm-12" aria-label="Sign in">
+   <!-- Bạn đã có tài khoản? <a class="text-link" routerLink="../login">{{'Button.SignIn' | translate}}</a> -->
+</section>

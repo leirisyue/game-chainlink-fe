@@ -1,0 +1,49 @@
+<form #form="ngForm" (ngSubmit)="submit()">
+   <nb-card class="modal-md">
+      <nb-card-header>
+         <h5 class="primary">{{data?.id ? ('Button.Update' | translate) : ('Button.Create' | translate)}}</h5>
+      </nb-card-header>
+      <nb-card-body>
+         <div class="row">
+            <div class="form-group col-sm-12">
+               <label class="label">{{'Global.Name' | translate}} *</label>
+               <input nbInput fullWidth maxlength="200" required [(ngModel)]="data.name" name="name" #name="ngModel"
+                  [status]="name.dirty ? (name.invalid  ? 'danger' : 'success') : 'basic'"
+                  [attr.aria-invalid]="name.invalid && name.touched ? true : null">
+               <ngx-validation-message label="{{'Global.Name' | translate}}"
+                  [showRequired]="name?.errors?.required && name.touched">
+               </ngx-validation-message>
+            </div>
+
+            <div class="form-group col-sm-6">
+               <label class="label">{{'relying.ports' | translate}}</label>
+               <div><small>( {{'Message.sub'|translate}} )</small></div>
+               <input nbInput fullWidth maxlength="200" [(ngModel)]="listPort" name="ports" #ports="ngModel"
+                  [status]="ports.dirty ? (ports.invalid  ? 'danger' : 'success') : 'basic'"
+                  [attr.aria-invalid]="ports.invalid && ports.touched ? true : null">
+            </div>
+
+            <div class="form-group col-sm-6">
+               <label class="label">{{'relying.subdomains' | translate}}</label>
+               <div><small>( {{'Message.sub'|translate}} )</small></div>
+               <input nbInput fullWidth maxlength="200" [(ngModel)]="listSub" name="subdomains"
+                  #subdomains="ngModel"
+                  [status]="subdomains.dirty ? (subdomains.invalid  ? 'danger' : 'success') : 'basic'"
+                  [attr.aria-invalid]="subdomains.invalid && subdomains.touched ? true : null">
+            </div>
+
+            <div class="form-group col-sm-12" hidden>
+               <label class="label">{{'Global.Description' | translate}}</label>
+               <textarea nbInput fullWidth maxlength="1000" [(ngModel)]="data.description" name="description"
+                  #description="ngModel"></textarea>
+            </div>
+
+         </div>
+      </nb-card-body>
+      <nb-card-footer>
+         <button type="submit" nbButton hero class="float-right ml-2" status="primary"
+            [disabled]="form.invalid">{{'Button.Save' | translate}}</button>
+         <button type="button" nbButton class="float-right" (click)="close()">{{'Button.Close' | translate}}</button>
+      </nb-card-footer>
+   </nb-card>
+</form>

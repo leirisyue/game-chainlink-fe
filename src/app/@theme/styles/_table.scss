@@ -1,0 +1,82 @@
+table {
+  width: 100%;
+}
+
+.mat-column-option {
+  width: 60px;
+}
+
+.mat-column-select {
+  width: 30px;
+  padding: 0 !important;
+}
+
+td {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// td.mat-column-id {
+//   width: 20px;
+// }
+
+tfoot td {
+  padding-left: 1.75rem !important;
+}
+
+tfoot th {
+  vertical-align: middle !important;
+}
+
+th,
+td {
+  vertical-align: middle !important;
+  padding-right: 0.5rem !important;
+  padding-left: 0.5rem !important;
+}
+
+th {
+  text-transform: uppercase;
+  font-weight: bold !important;
+  // text-align: center !important;
+}
+
+.table-scroll {
+  max-height: 450px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex: 1;
+  padding: var(--sidebar-padding);
+  position: relative;
+  -webkit-transform: translate3d(0, 0, 0);
+
+}
+
+.table {
+  color: var(--text-basic-color) !important;
+
+  th {
+    position: sticky;
+    background-color: var(--context-menu-background-color);
+    top: 0;
+    z-index: 10;
+  }
+}
+
+.mat-paginator-icon {
+  color: var(--text-basic-color);
+}
+
+.mat-select-value {
+  color: var(--text-basic-color);
+}
+
+.mat-select-arrow {
+  color: var(--text-basic-color);
+}
+
+.mat-menu-item[disabled] {
+  color: var(--text-basic-color);
+}

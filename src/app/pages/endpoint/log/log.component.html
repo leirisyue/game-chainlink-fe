@@ -1,0 +1,143 @@
+<nb-card>
+   <nb-card-header>
+      <div class="col-sm-12">
+         <div class="row align-items-center">
+            <h6 class="flex-1 text-uppercase">
+               {{'Log.LogTable'|translate}}
+            </h6>
+         </div>
+         <div class="col-dm-12 gap-none">
+            <div class="row">
+               <div class="col-sm-12 gap-none">
+                  <div class="row">
+                     <div class="form-group col-sm-6">
+                        <label class="label">Lọc theo</label>
+                        <nb-select fullWidth [(ngModel)]="filterBy" name="employee" #employee="ngModel" required
+                           placeholder="Tất cả" (ngModelChange)="changeOptionFilter()">
+                           <nb-option [value]="0">Tất cả</nb-option>
+                           <nb-option [value]="1">{{'Event.eventName' | translate}}</nb-option>
+                           <nb-option [value]="2">{{'Event.eventType' | translate}}</nb-option>
+                           <nb-option [value]="3">{{'User.userTable'|translate}}</nb-option>
+                        </nb-select>
+                     </div>
+                     <div class="form-group col-sm-6" *ngIf="filterBy === 1">
+                        <label class="label">{{'Event.eventName' | translate}} *</label>
+                        <nb-select fullWidth [(ngModel)]="eventNameValue" name="eventName" #eventName="ngModel" required
+                           placeholder="Chọn tác vụ">
+                           <nb-option *ngFor="let item of listEventName | keyvalue" [value]="item.value">
+                              {{'Event.' + item.value |translate}}
+                           </nb-option>
+                        </nb-select>
+                        <ngx-validation-message label="eventName"
+                           [showRequired]="eventName?.errors?.required && eventName.touched">
+                        </ngx-validation-message>
+                     </div>
+                     <div class="form-group col-sm-6" *ngIf="filterBy === 2">
+                        <label class="label">{{'Event.eventType' | translate}} *</label>
+                        <nb-select fullWidth [(ngModel)]="eventTypeValue" name="eventType" #eventType="ngModel" required
+                           placeholder="Chọn loại">
+                           <nb-option *ngFor="let item of listEventType | keyvalue" [value]="item.value">{{'Event.' +
+                              item.value |translate}}</nb-option>
+                        </nb-select>
+                        <ngx-validation-message label="eventType"
+                           [showRequired]="eventType?.errors?.required && eventType.touched">
+                        </ngx-validation-message>
+                     </div>
+                     <div class="form-group col-sm-6" *ngIf="filterBy === 3">
+                        <label class="label">{{'User.userTable'|translate}} *</label>
+                        <nb-select fullWidth [(ngModel)]="userId" name="user" #user="ngModel" required
+                           placeholder="Chọn người dùng">
+                           <!-- <nb-option [value]="">Tất cả</nb-option> -->
+                           <nb-option *ngFor="let item of listUser" [value]="item.id">{{item.displayName}}</nb-option>
+                        </nb-select>
+                        <ngx-validation-message label="{{'User.userTable'|translate}}"
+                           [showRequired]="user?.errors?.required && user.touched">
+                        </ngx-validation-message>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-sm-12 gap-none">
+                  <div class="row">
+                     <div class="form-group col-sm-6">
+                        <label class="label">{{'Từ ngày' | translate}} *</label>
+                        <nb-form-field>
+                           <input nbInput fullWidth [nbDatepicker]="formPickerTo" [(ngModel)]="from" name="fromDate"
+                              #toDate="ngModel">
+                           <nb-datepicker #formPickerTo format="dd/MM/yyyy" [max]="to"></nb-datepicker>
+                        </nb-form-field>
+                     </div>
+                     <div class="form-group col-sm-6">
+                        <label class="label">{{'Đến ngày' | translate}} *</label>
+                        <nb-form-field>
+                           <input nbInput fullWidth [nbDatepicker]="formPickerFrom" [(ngModel)]="to" name="toDate"
+                              #toDate="ngModel">
+                           <nb-datepicker #formPickerFrom format="dd/MM/yyyy" [min]="from"
+                              [max]="dateToday"></nb-datepicker>
+                        </nb-form-field>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-sm-12 text-right">
+                  <button type="button" nbButton hero class="float-right ml-2" status="primary" (click)="filterDataTable()">{{'Global.Search' |
+                     translate}}</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </nb-card-header>
+   <nb-card-body>
+      <div>
+         <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]" [pageSize]="10" class="float-right"
+            showFirstLastButtons></mat-paginator>
+         <div class="col-sm-6 gap-none">
+            <div class="row">
+               <div class="form-group col-sm-6">
+                  <nb-form-field>
+                     <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
+                     <input nbInput status="primary" placeholder="{{'Global.Search' | translate}}"
+                        (keyup)="doFilter($event.target.value)">
+                  </nb-form-field>
+               </div>
+            </div>
+         </div>
+      </div>
+      <table id="matTable" [dataSource]="dataSource" mat-table matSort>
+         <ng-container matColumnDef="id">
+            <th *matHeaderCellDef mat-header-cell mat-sort-header>STT</th>
+            <td *matCellDef="let item; let i = index;" mat-cell>
+               {{paginator.pageIndex * paginator.pageSize + i + 1}}
+            </td>
+         </ng-container>
+         <ng-container matColumnDef="eventName">
+            <th *matHeaderCellDef mat-header-cell mat-sort-header>{{'Event.eventName' | translate}}</th>
+            <td *matCellDef="let item" mat-cell nbTooltip="{{'Event.' + item.eventName |translate}}">{{ 'Event.' +
+               item.eventName |translate}}</td>
+         </ng-container>
+         <ng-container matColumnDef="eventType">
+            <th *matHeaderCellDef mat-header-cell mat-sort-header>{{'Event.eventType' | translate}}</th>
+            <td *matCellDef="let item" mat-cell nbTooltip="{{'Event.' + item.eventType |translate}}">{{'Event.' +
+               item.eventType |translate}}</td>
+         </ng-container>
+         <ng-container matColumnDef="eventStatus">
+            <th *matHeaderCellDef mat-header-cell mat-sort-header>{{'Event.eventStatus' | translate}}</th>
+            <td *matCellDef="let item" mat-cell nbTooltip="{{'Event.' + item.eventStatus |translate}}">{{'Event.' +
+               item.eventStatus |translate}}</td>
+         </ng-container>
+         <ng-container matColumnDef="eventDetail">
+            <th *matHeaderCellDef mat-header-cell mat-sort-header>{{'Event.eventDetail' | translate}}</th>
+            <td *matCellDef="let item" mat-cell nbTooltip="{{item.eventDetail}}">{{item.eventDetail}}</td>
+         </ng-container>
+         <ng-container matColumnDef="timestamp">
+            <th *matHeaderCellDef mat-header-cell mat-sort-header>{{'Event.timestamp' | translate}}</th>
+            <td *matCellDef="let item" mat-cell nbTooltip="{{item.timestamp | date:'dd/MM/yyyy'}}">
+               {{item.timestamp | date:'dd/MM/yyyy'}}
+            </td>
+         </ng-container>
+         <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+         <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
+      </table>
+      <div class="text-center" *ngIf="dataSource.data.length < 1">
+         {{'Message.NoData' | translate}}
+      </div>
+   </nb-card-body>
+</nb-card>

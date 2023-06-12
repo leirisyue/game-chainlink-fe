@@ -1,0 +1,15 @@
+nb-card {
+  // box-shadow: 0 8px 20px #dae0eb99 !important;
+  border: none !important;
+  border-radius: 1rem !important;
+  // border: 1px solid black !important;
+}
+
+.details-border {
+  border: 1px solid rgb(65, 66, 66);
+  border-bottom-right-radius: 20px;
+  border-top-left-radius: 20px;
+  height: auto;
+  width: 100%;
+  padding: 5px 0;
+}

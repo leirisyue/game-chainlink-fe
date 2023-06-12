@@ -1,0 +1,74 @@
+<form #form="ngForm" (ngSubmit)="submit(form.value)">
+   <nb-card class="modal-lg">
+      <nb-card-header>
+         <h5 class="primary">{{data?.id ? ('Button.Update' | translate) : ('Button.Create' | translate)}}
+            {{'Menu.Packages'|translate}}</h5>
+      </nb-card-header>
+
+      <nb-card-body>
+         <div class="col-sm-12">
+         <div class="row">
+            <div class="form-group col-sm-12">
+               <label class="label">{{'Global.Type' | translate}} *</label>
+               <nb-select fullWidth [(ngModel)]="data.type" name="type" #type="ngModel" required placeholder="">
+                  <nb-option *ngFor="let item of packageType | keyvalue" [value]="item.value">{{item.value}}</nb-option>
+               </nb-select>
+               <ngx-validation-message label="type" [showRequired]="type?.errors?.required && type.touched">
+               </ngx-validation-message>
+            </div>
+            <div class="form-group col-sm-12" *ngIf="data.type !== 'TIME' ">
+               <label class="label">
+                  {{'packages.Count' | translate}} *
+               </label>
+               <input nbInput type="number" fullWidth min="1" [(ngModel)]="data.amount" name="amount" #amount="ngModel">
+            </div>
+            <div class="col-sm-12 gape-none" *ngIf="data.type == 'TIME' ">
+               <div class="row">
+                  <div class="form-group col-sm-6">
+                     <label class="label"> {{'packages.TypeTime' | translate}} *</label>
+                     <nb-select fullWidth [(ngModel)]="data.typeLicense" name="typeLicense" #typeLicense="ngModel" placeholder="">
+                        <nb-option [value]="'minutes'">Phút</nb-option>
+                        <nb-option [value]="'hour'">Giờ</nb-option>
+                        <nb-option [value]="'date'">Ngày</nb-option>
+                     </nb-select>
+                  </div>
+                  <div class="form-group col-sm-6">
+                     <label class="label">
+                        {{'packages.CountTime' | translate}} *
+                     </label>
+                     <input nbInput type="number" fullWidth min="1" [(ngModel)]="data.amount" name="amount"
+                        #amount="ngModel" [disabled]="!data.typeLicense">
+                  </div>
+               </div>
+            </div>
+            <div class="form-group col-sm-12">
+               <label class="label">{{'relying.relying-party'|translate}} *</label>
+               <nb-select fullWidth [(ngModel)]="data.relyingPartyId" name="relyingPartyId" #relyingPartyId="ngModel"
+                  required placeholder="">
+                  <nb-option *ngFor="let item of listReplyingParty" [value]="item.id">{{item.name}}</nb-option>
+               </nb-select>
+               <ngx-validation-message label="{{'relying.relying-party'|translate}}"
+                  [showRequired]="relyingPartyId?.errors?.required && relyingPartyId.touched">
+               </ngx-validation-message>
+            </div>
+            <div class="form-group col-sm-12">
+               <label class="label">{{'Global.Description' | translate}}</label>
+               <textarea nbInput fullWidth maxlength="1000" [(ngModel)]="data.description" name="description"
+                  #description="ngModel"></textarea>
+            </div>
+         </div>
+
+      </div>
+
+
+      </nb-card-body>
+      <nb-card-footer>
+         <button type="submit" nbButton hero class="float-right ml-2" status="primary" [disabled]="">{{'Button.Save' |
+            translate}}</button>
+         <button type="button" nbButton class="float-right" (click)="close()">{{'Button.Close' | translate}}</button>
+      </nb-card-footer>
+   </nb-card>
+</form>
+
+
+
