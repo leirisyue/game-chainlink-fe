@@ -144,6 +144,11 @@ nb-radio.status-basic .native-input:disabled~.text {
 .cdk-overlay-pane::-webkit-scrollbar {
     display: none;
 }
-.cdk-overlay-pane{
+
+.cdk-overlay-pane {
     overflow-y: scroll;
+}
+
+.divider {
+    padding: 15px 0;
 }

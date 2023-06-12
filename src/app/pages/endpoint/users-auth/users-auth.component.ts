@@ -29,10 +29,7 @@ export class UsersAuthComponent implements OnInit {
   selection = new SelectionModel<AuthenticatorDto>(true, [])
   @ViewChild(MatSort, { static: false }) sort: MatSort
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator
-  items = [
-    { title: VIEWDETAIL, id: VIEWDETAIL },
-    { title: DELETE, id: DELETE },
-  ]
+
   //--------------------------------------------------------------------------------------------------
   sub: Subscription
   constructor(
@@ -52,14 +49,7 @@ export class UsersAuthComponent implements OnInit {
     if (this.paramId) {
       this.getAllUserAuthenticator()
     }
-    for (const iterator of this.items) {
-      this.translateService.get('Button.' + iterator.title).subscribe(data => {
-        if (!data.includes('Button')) {
-          iterator.title = data
-        }
-      })
-    }
-    this.onClickContextMenu()
+    // this.onClickContextMenu()
   }
 
   async getAllUserAuthenticator() {
@@ -95,16 +85,16 @@ export class UsersAuthComponent implements OnInit {
     this.dataSource.filter = value.trim().toLocaleLowerCase()
   }
   //--------------------------------------------------------------------------------------------------
-  private onClickContextMenu() {
-    this.sub = this.nbMenuService.onItemClick().subscribe((menuBag: any) => {
-      console.log("Record Id: ", menuBag.tag);
-      if (menuBag.item.id === VIEWDETAIL) {
-        this.openForm(menuBag.tag)
-      } else if (menuBag.item.id === DELETE) {
-        this.deleteUserAccount(menuBag.tag.id)
-      }
-    });
-  }
+  // private onClickContextMenu() {
+  //   this.sub = this.nbMenuService.onItemClick().subscribe((menuBag: any) => {
+  //     console.log("Record Id: ", menuBag.tag);
+  //     if (menuBag.item.id === VIEWDETAIL) {
+  //       this.openForm(menuBag.tag)
+  //     } else if (menuBag.item.id === DELETE) {
+  //       this.deleteUserAccount(menuBag.tag.id)
+  //     }
+  //   });
+  // }
   //--------------------------------------------------------------------------------------------------
   openForm(data?: AuthenticatorDto) {
     data.UserId = this.paramId

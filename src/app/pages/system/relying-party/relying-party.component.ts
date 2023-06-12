@@ -1,5 +1,5 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -9,10 +9,11 @@ import { RelyingPartyService } from '../../../@core/services/system/relying-part
 import { ReplyingPartyFormComponent } from '../replying-party-form/replying-party-form.component';
 
 import { NbDialogService, NbMenuService } from '@nebular/theme';
-import { ACTIVE, DELETE, INACTIVE, VIEW } from '../../../@core/interfaces/variable';
+import { ACTIVE, DELETE, INACTIVE, VIEW, VIEWDETAIL } from '../../../@core/interfaces/variable';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { MessageService } from '../../../@core/utils/message.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'ngx-relying-party',
@@ -26,14 +27,8 @@ export class RelyingPartyComponent implements OnInit {
   selection = new SelectionModel<RelyingPartyDto>(true, [])
   @ViewChild(MatSort, { static: false }) sort: MatSort
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator
-  itemACTIVE = [
-    { title: ACTIVE, id: ACTIVE },
-    { title: DELETE, id: DELETE },
-  ]
-  itemINACTIVE = [
-    { title: VIEW, id: VIEW },
-    { title: INACTIVE, id: INACTIVE },
-  ]
+  //-----------------------------------------------------------------------------
+
   sub: Subscription
   constructor(
     private relyingPartyService: RelyingPartyService,
@@ -44,21 +39,7 @@ export class RelyingPartyComponent implements OnInit {
   ) { }
   async ngOnInit() {
     await this.findAll()
-    for (const iterator of this.itemACTIVE) {
-      this.translateService.get('Button.' + iterator.title).subscribe(data => {
-        if (!data.includes('Button')) {
-          iterator.title = data
-        }
-      })
-    }
-    for (const iterator of this.itemINACTIVE) {
-      this.translateService.get('Button.' + iterator.title).subscribe(data => {
-        if (!data.includes('Button')) {
-          iterator.title = data
-        }
-      })
-    }
-    this.onClickContextMenu()
+    // this.onClickContextMENU()
   }
   public async findAll() {
     this.selection.clear()
@@ -96,26 +77,31 @@ export class RelyingPartyComponent implements OnInit {
     this.dataSource.filter = value.trim().toLocaleLowerCase()
   }
   //--------------------------------------------------------------------------------------------------
-  private onClickContextMenu() {
-    this.sub = this.nbMenuService.onItemClick().subscribe((menuBag: any) => {
-      if (menuBag.item.id === ACTIVE) {
-        this.updateRelyingPartyStatusActive(menuBag.tag.id)
-      } else if (menuBag.item.id === INACTIVE) {
-        this.updateRelyingPartyStatusInactive(menuBag.tag.id)
-      } else if (menuBag.item.id === DELETE) {
-        this.deleteRelyingParty(menuBag.tag.id)
-      } else if (menuBag.item.id === VIEW) {
-        this.openForm(menuBag.tag)
-      }
-    });
-  }
+  // private onClickContextMENU() {
+  //   this.sub = this.nbMenuService.onItemClick().subscribe((menuBag: any) => {
+  //     if (menuBag.item.id === ACTIVE) {
+  //       this.updateRelyingPartyStatusActive(menuBag.tag.id)
+  //     } else if (menuBag.item.id === INACTIVE) {
+  //       this.updateRelyingPartyStatusInactive(menuBag.tag.id)
+  //     } else if (menuBag.item.id === DELETE) {
+  //       this.deleteRelyingParty(menuBag.tag.id)
+  //     } else if (menuBag.item.id === VIEWDETAIL) {
+  //       this.openFormRelying(menuBag.tag)
+  //     }
+  //   });
+  // }
   //--------------------------------------------------------------------------------------------------
-  openForm(data?: RelyingPartyDto) {
+  openFormRelying(data?: RelyingPartyDto, view?: boolean) {
+    if (!data) {
+      view = false
+    }
     const dialogRef = this.dialogService.open(ReplyingPartyFormComponent, {
-      context: { data: data || new RelyingPartyDto() },
+      context: { data: data || new RelyingPartyDto(), view: view },
       closeOnBackdropClick: false,
     });
-    dialogRef.onClose.subscribe(() => this.findAll());
+    dialogRef.onClose.subscribe(() => {
+      this.findAll()
+    });
   }
   async updateRelyingPartyStatusActive(id: string) {
     const isYes = await this.messageService.getSwal('Bạn có muốn kích hoạt khách hàng này?')
@@ -143,5 +129,8 @@ export class RelyingPartyComponent implements OnInit {
         this.findAll()
       })
     }
+  }
+
+  ngOnDestroy() {
   }
 }

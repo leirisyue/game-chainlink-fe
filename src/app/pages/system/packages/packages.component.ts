@@ -1,5 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -13,7 +14,11 @@ import { UPDATE, DELETE, ACTIVE } from '../../../@core/interfaces/variable';
 import { PackageService } from '../../../@core/services/system/package.service';
 import { RelyingPartyService } from '../../../@core/services/system/relying-party.service';
 import { MessageService } from '../../../@core/utils/message.service';
-import { PackagesFormComponent } from '../packages-form/packages-form.component';
+import { PackagesFormComponent } from '../../../@form/packages-form/packages-form.component';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
+import { ConfigService } from '../../../@core/services/utils/config.service';
+import humanizeDuration from 'humanize-duration';
 
 @Component({
   selector: 'ngx-packages',
@@ -27,11 +32,7 @@ export class PackagesComponent implements OnInit {
   selection = new SelectionModel<any>(true, [])
   @ViewChild(MatSort, { static: false }) sort: MatSort
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator
-  items = [
-    { title: ACTIVE, id: ACTIVE },
-    { title: UPDATE, id: UPDATE },
-    { title: DELETE, id: DELETE },
-  ]
+
   sub: Subscription
   //-------------------------------------------------------------------------------------------------
   listReplyingParty: RelyingPartyDto[] = []
@@ -46,18 +47,16 @@ export class PackagesComponent implements OnInit {
     public translateService: TranslateService,
     private nbMenuService: NbMenuService,
     private messageService: MessageService,
+    private dialog: MatDialog,
+    private location: Location,
+    protected router: Router,
+    private configService: ConfigService
   ) { }
 
   async ngOnInit() {
     await this.findAllRelyingParty()
-    for (const iterator of this.items) {
-      this.translateService.get('Button.' + iterator.title).subscribe(data => {
-        if (!data.includes('Button')) {
-          iterator.title = data
-        }
-      })
-    }
-    this.onClickContextMenu()
+
+    // this.onClickContextMenu()
   }
 
   public async findAllRelyingParty() {
@@ -99,8 +98,7 @@ export class PackagesComponent implements OnInit {
       if (data) {
         for (const packages of data.packages) {
           if (packages.type === PackageType.TIME) {
-            packages.typeLicense = this.changeAmountMillisecond(packages.amount)
-            packages.amount = this.changeAmountTimePlus(packages.amount, packages.typeLicense)
+            packages.typeLicense = humanizeDuration(packages.amount, { largest: 2, language: 'vi', units: ["y", "mo", "d", "h", "m", "s"], round: true });
           }
         }
         this.servicePackageDto = data
@@ -115,8 +113,7 @@ export class PackagesComponent implements OnInit {
         data = data.sort((a, b) => new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime())
         for (const packages of data) {
           if (packages.type === PackageType.TIME) {
-            packages.typeLicense = this.changeAmountMillisecond(packages.amount)
-            packages.amount = this.changeAmountTimePlus(packages.amount, packages.typeLicense)
+            packages.typeLicense = humanizeDuration(packages.amount, { largest: 2, language: 'vi', units: ["y", "mo", "d", "h", "m", "s"], round: true });
           }
         }
         this.dataSource.sort = this.sort
@@ -126,43 +123,8 @@ export class PackagesComponent implements OnInit {
     })
   }
 
-
-  changeAmountMillisecond(amount: number) {
-    let timezone = ''
-    if (amount % 86400000 === 0) {
-      timezone = 'date'
-    } else if (amount % 3600000 === 0) {
-      timezone = 'hour'
-    } else if (amount % 60000 === 0) {
-      timezone = 'minutes'
-    } else if (amount % 1000 === 0) {
-      timezone = 'second'
-    }
-    return timezone
-  }
-  changeAmountTimePlus(amount: number, timezone: string) {
-    let timePlus = 0
-    switch (timezone) {
-      case 'second':
-        timePlus = amount / 1000
-        break;
-      case 'minutes':
-        timePlus = amount / (60 * 1000)
-        break;
-      case 'hour':
-        timePlus = amount / (60 * 60 * 1000)
-        break;
-      case 'date':
-        timePlus = amount / (24 * 60 * 60 * 1000)
-        break;
-      default:
-        timePlus = 1
-        break;
-    }
-    return timePlus
-  }
   //--------------------------------------------------------------------------------------------------
-  openForm(data?: PackageDto) {
+  openFormPackage(data?: PackageDto) {
     const dialogRef = this.dialogService.open(PackagesFormComponent, {
       context: { data: data || new PackageDto() },
       closeOnBackdropClick: false,
@@ -174,17 +136,17 @@ export class PackagesComponent implements OnInit {
     });
   }
   //--------------------------------------------------------------------------------------------------
-  private onClickContextMenu() {
-    this.sub = this.nbMenuService.onItemClick().subscribe(async (menuBag: any) => {
-      if (menuBag.item.id === UPDATE) {
-        this.openForm(menuBag.tag)
-      } else if (menuBag.item.id === DELETE) {
-        this.deleteItem(menuBag.tag.id)
-      } else if (menuBag.item.id === ACTIVE) {
-        this.activateRelyingPartyPackage(menuBag.tag.id)
-      }
-    });
-  }
+  // private onClickContextMenu() {
+  //   this.sub = this.nbMenuService.onItemClick().subscribe(async (menuBag: any) => {
+  //     if (menuBag.item.id === UPDATE) {
+  //       this.openFormPackage(menuBag.tag)
+  //     } else if (menuBag.item.id === DELETE) {
+  //       this.deleteItem(menuBag.tag.id)
+  //     } else if (menuBag.item.id === ACTIVE) {
+  //       this.activateRelyingPartyPackage(menuBag.tag.id)
+  //     }
+  //   });
+  // }
   async deleteItem(id: string) {
     let isError = false
     const isYes = await this.messageService.getSwal('Bạn có muốn xóa gói dịch vụ này?')
@@ -213,5 +175,9 @@ export class PackagesComponent implements OnInit {
         }
       }
     }
+  }
+
+  ngOnDestroy() {
+    this.dialog.closeAll()
   }
 }

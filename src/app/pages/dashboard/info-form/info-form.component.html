@@ -5,7 +5,7 @@
       </nb-card-header>
       <nb-card-body>
          <div class="row">
-            <div class="form-group col-sm-12">
+            <div class="form-group col-sm-12" hidden>
                <label class="label">{{'Global.Name' | translate}} *</label>
                <input nbInput fullWidth maxlength="200" required [(ngModel)]="data.name" name="name" #name="ngModel"
                   [status]="name.dirty ? (name.invalid  ? 'danger' : 'success') : 'basic'"

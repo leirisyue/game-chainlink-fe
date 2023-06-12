@@ -32,7 +32,7 @@ export class UsersService {
    }
 
    deleteUserAccount(id: string): Observable<UserAccountDto> {
-      return this.api.delete(this.path + `/${id}`, null)
+      return this.api.delete(this.path + `/${id}`)
    }
 
    updateUserAuthenticator(form: UserAuthenticatorUpdateForm, id: string, authenticatorId: string): Observable<AuthenticatorDto> {
@@ -40,7 +40,7 @@ export class UsersService {
    }
 
    deleteUserAuthenticator(id: string, authenticatorId: string): Observable<AuthenticatorDto> {
-      return this.api.delete(this.path + `/${id}/authenticators/${authenticatorId}`, null)
+      return this.api.delete(this.path + `/${id}/authenticators/${authenticatorId}`)
    }
 
 }

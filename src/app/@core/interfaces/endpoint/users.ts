@@ -7,6 +7,7 @@ export class UserAccountDto {
    createdDate: Date
    relyingPartyId: string
    filter?: string
+   password?: string
 }
 
 export class UserAccountCreateForm {

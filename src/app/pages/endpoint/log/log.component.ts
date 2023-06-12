@@ -167,9 +167,7 @@ export class LogComponent implements OnInit {
       from = null
     }
     this.selection.clear()
-    this.dataSource.sort = this.sort
-    this.dataSource.paginator = this.paginator
-    if (!this.eventTypeValue) {
+    if (!this.userId) {
       return
     }
     await this.eventService.getLogEventByUser(this.userId, from, to).toPromise().then(data => {

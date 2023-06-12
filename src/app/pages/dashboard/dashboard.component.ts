@@ -11,6 +11,9 @@ import { InfoService } from '../../@core/services/endpoint/info.service';
 import { PackageService } from '../../@core/services/system/package.service';
 import { ConfigService } from '../../@core/services/utils/config.service';
 import { InfoFormComponent } from './info-form/info-form.component';
+import humanizeDuration from 'humanize-duration';
+import { TranslateService } from '@ngx-translate/core';
+import { I18nService } from '../../@core/utils/i18n.service';
 
 @Component({
   selector: 'ngx-dashboard',
@@ -23,6 +26,7 @@ export class DashboardComponent implements OnInit {
   relyingParty: RelyingPartyDto
   listPort: string
   listSub: string
+  listOrigin: string
   //---------------------------------------------------------------------------------
   systemUsageDto: SystemUsageDto = new SystemUsageDto()
   //---------------------------------------------------------------------------------
@@ -38,8 +42,17 @@ export class DashboardComponent implements OnInit {
     public infoService: InfoService,
     private dialogService: NbDialogService,
     private packageService: PackageService,
-    private configService: ConfigService
-  ) { }
+    private configService: ConfigService,
+    private translateService: TranslateService,
+    public i18nService: I18nService,
+  ) {
+    if (!this.i18nService.getLocaleLanguage()) {
+      this.i18nService.changeLanguage(this.i18nService.language);
+    } else {
+      this.i18nService.language = this.i18nService.getLocaleLanguage();
+      this.translateService.use(this.i18nService.language);
+    }
+  }
 
   async ngOnInit() {
     if (this.authService.subject !== Role.SYSTEM) {
@@ -59,7 +72,13 @@ export class DashboardComponent implements OnInit {
       }
       if (data.subdomains.length > 0) {
         this.listSub = ''
-        this.listSub = data.subdomains.join(', ')
+        this.listSub = data.subdomains.join(',  ')
+      }
+      if (data.origins.length > 0) {
+        this.listOrigin = ''
+        for (let index = 0; index < data.origins.length; index++) {
+          this.listOrigin = this.listOrigin + data?.origins[index] + "\n";
+        }
       }
     })
   }
@@ -69,15 +88,13 @@ export class DashboardComponent implements OnInit {
         data.packages = data.packages.sort((a, b) => new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime())
         for (const packages of data.packages) {
           if (packages.type === PackageType.TIME) {
-            packages.typeLicense = this.configService.changeAmountMillisecond(packages.amount)
-            packages.amount = this.configService.changeAmountTimePlus(packages.amount, packages.typeLicense)
+            packages.typeLicense = humanizeDuration(packages.amount, { largest: 2, language: 'vi', units: ["y", "mo", "d", "h", "m", "s"], round: true });
           }
         }
         this.dataSource.sort = this.sort
         this.dataSource.paginator = this.paginator
         this.dataSource.data = data.packages
         this.servicePackageDto = data
-
       }
     })
   }
@@ -88,11 +105,11 @@ export class DashboardComponent implements OnInit {
     })
   }
   //---------------------------------------------------------------------------------
-  getInputType() {
+  getInputType(text: any) {
     if (this.showPassword) {
-      return 'text';
+      return text;
     }
-    return 'password';
+    return "********************************";
   }
   toggleShowPassword() {
     this.showPassword = !this.showPassword;

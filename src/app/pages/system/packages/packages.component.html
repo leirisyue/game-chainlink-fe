@@ -6,7 +6,7 @@
                {{'packages.packagesTable' |translate}}
             </h6>
             <div>
-               <button nbButton hero status="primary" class="m-1" (click)="openForm()">{{'Button.Create' |
+               <button nbButton hero status="primary" class="m-1" (click)="openFormPackage()">{{'Button.Create' |
                   translate}}</button>
             </div>
          </div>
@@ -27,7 +27,7 @@
       <div class="pb-5">
          <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]" [pageSize]="10" class="float-right" showFirstLastButtons>
          </mat-paginator>
-         <div class="col-sm-3">
+         <div class="col-sm-4">
             <nb-form-field>
                <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
                <input nbInput status="primary" placeholder="{{'Global.Search' | translate}}"
@@ -40,64 +40,73 @@
             <div class="col-sm-12 title">
                <h6>{{'packages.packagesUser' |translate}}</h6>
             </div>
-            <div class="form-group col-sm-4">
-               <label class="label">{{'packages.totalQuantity' | translate}}</label>
-               <input nbInput fullWidth value="{{servicePackageDto?.user?.totalQuantity | separator}}" readonly>
+            <div class="col-sm-4">
+               <label class="label pr-2">{{'packages.totalQuantity' | translate}}: </label>
+               <span>{{servicePackageDto?.user?.totalQuantity | separator}}</span>
             </div>
-            <div class="form-group col-sm-4">
-               <label class="label">{{'packages.usedQuantity' | translate}}</label>
-               <input nbInput fullWidth value="{{servicePackageDto?.user?.usedQuantity | separator}}" readonly>
+            <div class="col-sm-4">
+               <label class="label pr-2">{{'packages.usedQuantity' | translate}}: </label>
+               <span>{{servicePackageDto?.user?.usedQuantity | separator}}</span>
             </div>
-            <div class="form-group col-sm-4">
-               <label class="label">{{'packages.freeQuantity' | translate}}</label>
-               <input nbInput fullWidth value="{{servicePackageDto?.user?.freeQuantity | separator}}" readonly>
+            <div class="col-sm-4">
+               <label class="label pr-2">{{'packages.freeQuantity' | translate}}: </label>
+               <span>{{servicePackageDto?.user?.freeQuantity | separator}}</span>
             </div>
+         </div>
+         <div class="divider" *ngIf="servicePackageDto?.subdomain?.totalQuantity>0" >
+            <mat-divider></mat-divider>
          </div>
          <div class="row" *ngIf="servicePackageDto?.subdomain?.totalQuantity>0">
             <div class="col-sm-12 title">
                <h6>{{'packages.packagesSubdomain' |translate}}</h6>
             </div>
-            <div class="form-group col-sm-4">
-               <label class="label">{{'packages.totalQuantity' | translate}}</label>
-               <input nbInput fullWidth value="{{servicePackageDto?.subdomain?.totalQuantity | separator}}" readonly>
+            <div class="col-sm-4">
+               <label class="label pr-2">{{'packages.totalQuantity' | translate}}: </label>
+               <span>{{servicePackageDto?.subdomain?.totalQuantity | separator}}</span>
             </div>
-            <div class="form-group col-sm-4">
-               <label class="label">{{'packages.usedQuantity' | translate}}</label>
-               <input nbInput fullWidth value="{{servicePackageDto?.subdomain?.usedQuantity | separator}}" readonly>
+            <div class="col-sm-4">
+               <label class="label pr-2">{{'packages.usedQuantity' | translate}}: </label>
+               <span>{{servicePackageDto?.subdomain?.usedQuantity | separator}}</span>
             </div>
-            <div class="form-group col-sm-4">
-               <label class="label">{{'packages.freeQuantity' | translate}}</label>
-               <input nbInput fullWidth value="{{servicePackageDto?.subdomain?.freeQuantity | separator}}" readonly>
+            <div class="col-sm-4">
+               <label class="label pr-2">{{'packages.freeQuantity' | translate}}: </label>
+               <span>{{servicePackageDto?.subdomain?.freeQuantity | separator}}</span>
             </div>
+         </div>
+         <div class="divider" *ngIf="servicePackageDto?.port?.totalQuantity>0" >
+            <mat-divider></mat-divider>
          </div>
          <div class="row" *ngIf="servicePackageDto?.port?.totalQuantity>0">
             <div class="col-sm-12 title">
                <h6>{{'packages.packagesPort' |translate}}</h6>
             </div>
-            <div class="form-group col-sm-4">
-               <label class="label">{{'packages.totalQuantity' | translate}}</label>
-               <input nbInput fullWidth value="{{servicePackageDto?.port?.totalQuantity | separator}}" readonly>
+            <div class="col-sm-4">
+               <label class="label pr-2">{{'packages.totalQuantity' | translate}}: </label>
+               <span>{{servicePackageDto?.port?.totalQuantity | separator}}</span>
             </div>
-            <div class="form-group col-sm-4">
-               <label class="label">{{'packages.usedQuantity' | translate}}</label>
-               <input nbInput fullWidth value="{{servicePackageDto?.port?.usedQuantity | separator}}" readonly>
+            <div class="col-sm-4">
+               <label class="label pr-2">{{'packages.usedQuantity' | translate}}: </label>
+               <span>{{servicePackageDto?.port?.usedQuantity | separator}}</span>
             </div>
-            <div class="form-group col-sm-4">
-               <label class="label">{{'packages.freeQuantity' | translate}}</label>
-               <input nbInput fullWidth value="{{servicePackageDto?.port?.freeQuantity | separator}}" readonly>
+            <div class="col-sm-4">
+               <label class="label pr-2">{{'packages.freeQuantity' | translate}}: </label>
+               <span>{{servicePackageDto?.port?.freeQuantity | separator}}</span>
             </div>
+         </div>
+         <div class="divider" *ngIf="idReplyingParty">
+            <mat-divider></mat-divider>
          </div>
          <div class="row" *ngIf="idReplyingParty">
             <div class="col-sm-12 title">
                <h6>{{'packages.packagesLicense' |translate}}</h6>
             </div>
-            <div class="form-group col-sm-4">
-               <label class="label">{{'Date.expiration' | translate}}</label>
-               <input nbInput fullWidth value="{{servicePackageDto?.time?.expiration | date:'dd/MM/yyyy'}}" readonly>
+            <div class="col-sm-4">
+               <label class="label pr-2">{{'Date.expiration' | translate}}: </label>
+               <span>{{servicePackageDto?.time?.expiration | date: 'dd/MM/yyyy hh:mm:ss '}}</span>
             </div>
-            <div class="form-group col-sm-4">
-               <label class="label">{{'packages.remaining' | translate}}</label>
-               <input nbInput fullWidth value="{{servicePackageDto?.time?.remaining | separator}}" readonly>
+            <div class="col-sm-4" [hidden]="!servicePackageDto?.time?.remaining">
+               <label class="label pr-2">{{'packages.remaining' | translate}}: </label>
+               <span>{{servicePackageDto?.time?.remaining | separator}}</span>
             </div>
          </div>
       </div>
@@ -114,26 +123,29 @@
                <ng-container matColumnDef="amount">
                   <th *matHeaderCellDef mat-header-cell mat-sort-header>{{'packages.amount' | translate}}</th>
                   <td *matCellDef="let item" mat-cell nbTooltip="{{item.amount}}">
-                     {{item.amount | separator}}
+                     <span *ngIf="item.type !== 'TIME'">
+                        {{item.amount | separator}}
+                     </span>
                      <span *ngIf="item.type === 'TIME'">
-                        {{ 'packages.' +item?.typeLicense |translate}}
+                        {{ item?.typeLicense }}
                      </span>
                   </td>
                </ng-container>
                <ng-container matColumnDef="type">
                   <th *matHeaderCellDef mat-header-cell mat-sort-header>{{'Global.Type' | translate}}</th>
-                  <td *matCellDef="let item" mat-cell nbTooltip="{{item.type}}">{{item.type}}</td>
+                  <td *matCellDef="let item" mat-cell nbTooltip="{{item?.type}}">
+                     {{'packages.' +item?.type | translate}}</td>
                </ng-container>
                <ng-container matColumnDef="createdDate">
                   <th *matHeaderCellDef mat-header-cell mat-sort-header>{{'Date.createdDate' | translate}}</th>
-                  <td *matCellDef="let item" mat-cell nbTooltip="{{item.createdDate | date:'dd/MM/yyyy'}}">
-                     {{item.createdDate | date:'dd/MM/yyyy'}}</td>
+                  <td *matCellDef="let item" mat-cell nbTooltip="{{item.createdDate | date: 'dd/MM/yyyy hh:mm:ss '}}">
+                     {{item.createdDate | date: 'dd/MM/yyyy hh:mm:ss '}}</td>
                </ng-container>
                <ng-container matColumnDef="activatedDate">
                   <th *matHeaderCellDef mat-header-cell mat-sort-header>{{'Date.activatedDate' |
                      translate}}</th>
-                  <td *matCellDef="let item" mat-cell nbTooltip="{{item.activatedDate | date:'dd/MM/yyyy'}}">
-                     {{item.activatedDate | date:'dd/MM/yyyy'}}</td>
+                  <td *matCellDef="let item" mat-cell nbTooltip="{{item.activatedDate | date: 'dd/MM/yyyy hh:mm:ss '}}">
+                     {{item.activatedDate | date: 'dd/MM/yyyy hh:mm:ss '}}</td>
                </ng-container>
                <ng-container matColumnDef="description">
                   <th *matHeaderCellDef mat-header-cell mat-sort-header>{{'Global.Description' | translate}}</th>
@@ -142,16 +154,30 @@
                <ng-container matColumnDef="option">
                   <th *matHeaderCellDef mat-header-cell>{{'Global.Option' | translate}}</th>
                   <td *matCellDef="let item" mat-cell>
-                     <button nbButton ghost [nbContextMenu]="items" [nbContextMenuTag]="item"
-                        nbContextMenuTrigger="click" *ngIf="!item.activatedDate">
-                        <nb-icon icon="more-vertical-outline"></nb-icon>
-                     </button>
+
+                     <div style="right: 0;">
+                        <button nbButton ghost [matMenuTriggerFor]="menuUserAuth" *ngIf="!item.activatedDate">
+                           <nb-icon icon="more-vertical-outline"></nb-icon>
+                        </button>
+                        <mat-menu #menuUserAuth="matMenu">
+                           <button mat-menu-item (click)="activateRelyingPartyPackage(item.id)"
+                              class="text-center min-width-160">
+                              <span>{{'Button.Active' | translate}}</span>
+                           </button>
+                           <button mat-menu-item (click)="deleteItem(item?.id)" class="text-center min-width-160">
+                              <span>{{'Button.Delete' | translate}}</span>
+                           </button>
+                           <button mat-menu-item (click)="openFormPackage(item)" class="text-center min-width-160">
+                              <span>{{'Button.Update' | translate}}</span>
+                           </button>
+                        </mat-menu>
+                     </div>
                   </td>
                </ng-container>
                <ng-container matColumnDef="select">
                   <th mat-header-cell *matHeaderCellDef>
                      <div *ngIf="dataSource.filteredData.length > 1">
-                        <input type="checkbox" (change)="$event ? masterToggle() : null"6
+                        <input type="checkbox" (change)="$event ? masterToggle() : null" 6
                            [checked]="selection.hasValue() && isAllSelected()"
                            [indeterminate]="selection.hasValue() && !isAllSelected()">
                         <i class="fa fa-angle-down cursor-pointer ml-1" [matMenuTriggerFor]="menu"></i>

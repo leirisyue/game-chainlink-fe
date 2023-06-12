@@ -10,3 +10,7 @@ nb-toast.status-warning {
 .title h6 {
     color: var(--button-hero-primary-left-background-color),
 }
+
+[nbInput].status-basic:disabled {
+    color: black !important;
+ }

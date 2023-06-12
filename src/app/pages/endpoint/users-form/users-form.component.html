@@ -8,17 +8,24 @@
          <div class="row">
             <div class="form-group col-sm-12">
                <label class="label">{{'Global.userLogin' | translate}} </label>
-               <input nbInput fullWidth [(ngModel)]="dataInput.username" name="username" #username="ngModel">
+               <input nbInput fullWidth [(ngModel)]="data.userLogin" name="username" #username="ngModel" [disabled]="view">
                <ngx-validation-message label="{{'Global.userLogin' | translate}}"
                   [showRequired]="username?.errors?.required && username.touched">
                </ngx-validation-message>
             </div>
             <div class="form-group col-sm-12">
+               <label class="label">{{'Global.displayName' | translate}} </label>
+               <input nbInput fullWidth [(ngModel)]="data.displayName" name="displayName" #displayName="ngModel" [disabled]="view">
+               <ngx-validation-message label="{{'Global.displayName' | translate}}"
+                  [showRequired]="displayName?.errors?.required && displayName.touched">
+               </ngx-validation-message>
+            </div>
+            <div class="form-group col-sm-12" hidden>
                <label class="label">{{'Global.Password' | translate}} </label>
                <nb-form-field>
-                  <input [type]="getInputType()" nbInput fullWidth id="input-password" [(ngModel)]="dataInput.password"
+                  <input [type]="getInputType()" nbInput fullWidth id="input-password" [(ngModel)]="data.password"
                      name="password" #password="ngModel"
-                     [status]="password.dirty ? (password.invalid  ? 'danger' : 'success') : 'basic'">
+                     [status]="password.dirty ? (password.invalid  ? 'danger' : 'success') : 'basic'" [disabled]="view">
                   <button nbSuffix nbButton ghost (click)="toggleShowPassword()" type="button">
                      <nb-icon [icon]="showPassword ? 'eye-outline' : 'eye-off-2-outline'" pack="eva"
                         [attr.aria-label]="showPassword ? 'hide password' : 'show password'">
@@ -29,17 +36,10 @@
                   [showRequired]="password?.errors?.required && password.touched">
                </ngx-validation-message>
             </div>
-            <div class="form-group col-sm-12">
-               <label class="label">{{'Global.displayName' | translate}} </label>
-               <input nbInput fullWidth [(ngModel)]="dataInput.displayName" name="displayName" #displayName="ngModel">
-               <ngx-validation-message label="{{'Global.displayName' | translate}}"
-                  [showRequired]="displayName?.errors?.required && displayName.touched">
-               </ngx-validation-message>
-            </div>
          </div>
       </nb-card-body>
       <nb-card-footer>
-         <button type="submit" nbButton hero class="float-right ml-2" status="primary" [disabled]="">{{'Button.Save' |
+         <button type="submit" nbButton hero class="float-right ml-2" status="primary" [disabled]="view">{{'Button.Save' |
             translate}}</button>
          <button type="button" nbButton class="float-right" (click)="close()">{{'Button.Close' | translate}}</button>
       </nb-card-footer>

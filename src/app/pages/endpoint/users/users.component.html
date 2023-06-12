@@ -54,16 +54,30 @@
          </ng-container>
          <ng-container matColumnDef="createdDate">
             <th *matHeaderCellDef mat-header-cell mat-sort-header>{{'Date.createdDate' | translate}}</th>
-            <td *matCellDef="let item" mat-cell nbTooltip="{{item.createdDate | date:'dd/MM/yyyy'}}">
-               {{item.createdDate | date:'dd/MM/yyyy'}}</td>
+            <td *matCellDef="let item" mat-cell nbTooltip="{{item.createdDate | date: 'dd/MM/yyyy hh:mm:ss '}}">
+               {{item.createdDate | date: 'dd/MM/yyyy hh:mm:ss '}}</td>
          </ng-container>
          <ng-container matColumnDef="option">
             <th *matHeaderCellDef mat-header-cell>{{'Global.Option' | translate}}</th>
             <td *matCellDef="let item" mat-cell>
-               <button nbButton ghost [nbContextMenu]="items" [nbContextMenuTag]="item"
-                  nbContextMenuTrigger="click" >
-                  <nb-icon icon="more-vertical-outline"></nb-icon>
-               </button>
+
+               <div style="right: 0;">
+                  <button nbButton ghost [matMenuTriggerFor]="menuUser">
+                     <nb-icon icon="more-vertical-outline"></nb-icon>
+                  </button>
+                  <mat-menu #menuUser="matMenu">
+                     <button mat-menu-item (click)="openFormView(item.id)" class="text-center min-width-160">
+                        <span>{{'Button.ViewDevice' | translate}}</span>
+                     </button> <button mat-menu-item (click)="openForm(item)" class="text-center min-width-160">
+                        <span>{{'Button.Info' | translate}}</span>
+                     </button>
+                     <button mat-menu-item (click)="deleteUserAccount(item?.id)"
+                        class="text-center min-width-160">
+                        <span>{{'Button.DeleteUser' | translate}}</span>
+                     </button>
+                  </mat-menu>
+               </div>
+
             </td>
          </ng-container>
          <ng-container matColumnDef="select">

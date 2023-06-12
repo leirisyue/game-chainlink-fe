@@ -54,25 +54,26 @@ export class ConfigService {
 
   changeAmountMillisecond(amount: number) {
     let timezone = ''
-    if (amount % 86400000 === 0) {
+    if (amount >= 86400000) {
       timezone = 'date'
-    } else if (amount % 3600000 === 0) {
+    } else if (amount >= 3600000) {
       timezone = 'hour'
-    } else if (amount % 60000 === 0) {
+    } else if (amount >= 60000) {
       timezone = 'minutes'
-    } else if (amount % 1000 === 0) {
+    } else if (amount >= 1000) {
       timezone = 'second'
     }
     return timezone
   }
   changeAmountTimePlus(amount: number, timezone: string) {
     let timePlus = 0
+    let day = 0, hour = 0, minutes = 0, second = 0
     switch (timezone) {
       case 'second':
         timePlus = amount / 1000
         break;
       case 'minutes':
-        timePlus = amount / (60 * 1000)
+        minutes = Math.floor(amount / (60 * 1000))
         break;
       case 'hour':
         timePlus = amount / (60 * 60 * 1000)

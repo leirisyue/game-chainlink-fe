@@ -5,25 +5,110 @@
             {{'relying.relying-party'|translate}}</h5>
       </nb-card-header>
       <nb-card-body>
-         <div class="row">
-            <div class="form-group col-sm-12">
-               <label class="label">{{'Global.Name' | translate}} *</label>
-               <input nbInput fullWidth maxlength="200" [(ngModel)]="data.name" name="name" #name="ngModel" [disabled]="view">
-               <ngx-validation-message label="name" [showRequired]="name?.errors?.required && name.touched">
-               </ngx-validation-message>
-            </div>
-            <div class="form-group col-sm-12">
-               <label class="label">{{'relying.origin' | translate}} *</label>
-               <div><small>({{'Message.https'|translate}})</small></div>
-               <input separatorNumber nbInput fullWidth min="0" required [(ngModel)]="data.origin" name="origin"
-                  #origin="ngModel" [attr.aria-invalid]="origin.invalid && origin.touched ? true : null"  [disabled]="view">
-               <ngx-validation-message label="origin" [showRequired]="origin?.errors?.required && origin.touched">
-               </ngx-validation-message>
-            </div>
-            <div class="form-group col-sm-12">
-               <label class="label">{{'Global.Description' | translate}}</label>
-               <textarea nbInput fullWidth maxlength="1000" [(ngModel)]="data.description" name="description"
-                  #description="ngModel"  [disabled]="view"></textarea>
+         <div class="col-sm-12">
+            <div class="row">
+               <div class="form-group col-sm-12" *ngIf="!view">
+                  <label class="label">{{'Global.Name' | translate}} *</label>
+                  <input nbInput fullWidth maxlength="200" [(ngModel)]="data.name" name="name" #name="ngModel"
+                     [disabled]="view">
+                  <ngx-validation-message label="name" [showRequired]="name?.errors?.required && name.touched">
+                  </ngx-validation-message>
+               </div>
+               <div class="form-group col-sm-12" *ngIf="!view">
+                  <label class="label">{{'relying.origin' | translate}} *</label>
+                  <div><small>({{'Message.https'|translate}})</small></div>
+                  <input separatorNumber nbInput fullWidth min="0" required [(ngModel)]="data.origin" name="origin"
+                     #origin="ngModel" [attr.aria-invalid]="origin.invalid && origin.touched ? true : null"
+                     [disabled]="view">
+                  <ngx-validation-message label="origin" [showRequired]="origin?.errors?.required && origin.touched">
+                  </ngx-validation-message>
+               </div>
+               <div class="form-group col-sm-12" *ngIf="!view">
+                  <label class="label">{{'Global.Description' | translate}}</label>
+                  <textarea nbInput fullWidth maxlength="1000" [(ngModel)]="data.description" name="description"
+                     #description="ngModel" [disabled]="view"></textarea>
+               </div>
+               <div class="col-sm-12">
+                  <div class="p-10-bottom">
+                     <div class="col-sm-12 p-0 m-0">
+                        <div class="row p-0 m-0">
+                           <div class="details-border" *ngIf="view">
+                              <div class="col-sm-12 row pt-2 pb-2">
+                                 <div class="col-md-3 col-sm-12 text-md-right ">
+                                    {{'Global.Name' | translate}}
+                                 </div>
+                                 <div class="col-md-9 col-sm-12">
+                                    <label>{{data?.name}}</label>
+                                 </div>
+                              </div>
+                              <mat-divider></mat-divider>
+                              <div class="col-sm-12 row pt-2 pb-2">
+                                 <div class="col-md-3 col-sm-12 text-md-right ">
+                                    {{'relying.origin' | translate}}
+                                 </div>
+                                 <div class="col-md-9 col-sm-12">
+                                    <label>{{data?.origin}}</label>
+                                 </div>
+                              </div>
+                              <mat-divider></mat-divider>
+                              <div class="col-sm-12 row pt-2 pb-2">
+                                 <div class="col-md-3 col-sm-12 text-md-right ">
+                                    {{'relying.ID' | translate}}
+                                 </div>
+                                 <div class="col-md-9 col-sm-12">
+                                    <label>{{data?.id}}</label>
+                                 </div>
+                              </div>
+                              <mat-divider></mat-divider>
+                              <div class="col-sm-12 row pt-2 pb-2">
+                                 <div class="col-md-3 col-sm-12 text-md-right ">
+                                    {{'relying.secret' | translate}}
+                                 </div>
+                                 <div class="col-md-9 col-sm-12" style="line-break: anywhere;">
+                                    <label>{{data?.secret}}</label>
+                                 </div>
+                              </div>
+                              <mat-divider></mat-divider>
+                              <div class="col-sm-12 row pt-2 pb-2">
+                                 <div class="col-md-3 col-sm-12 text-md-right ">
+                                    {{'relying.ports' | translate}}
+                                 </div>
+                                 <div class="col-md-9 col-sm-12" style="line-break: anywhere;">
+                                    <label>{{listPort}}</label>
+                                 </div>
+                              </div>
+                              <mat-divider></mat-divider>
+                              <div class="col-sm-12 row pt-2 pb-2">
+                                 <div class="col-md-3 col-sm-12 text-md-right ">
+                                    {{'relying.origins' | translate}}
+                                 </div>
+                                 <div class="col-md-9 col-sm-12" style="line-break: anywhere;">
+                                    <label>{{listSub}}</label>
+                                 </div>
+                              </div>
+                              <mat-divider></mat-divider>
+                              <div class="col-sm-12 row pt-2 pb-2">
+                                 <div class="col-md-3 col-sm-12 text-md-right ">
+                                    {{'Date.createdDate' | translate}}
+                                 </div>
+                                 <div class="col-md-9 col-sm-12" style="line-break: anywhere;">
+                                    <label>{{data?.createdDate | date :'dd/MM/yyyy hh:mm:ss'}}</label>
+                                 </div>
+                              </div>
+                              <mat-divider></mat-divider>
+                              <div class="col-sm-12 row pt-2 pb-2">
+                                 <div class="col-md-3 col-sm-12 text-md-right ">
+                                    {{'Global.Description' | translate}}
+                                 </div>
+                                 <div class="col-md-9 col-sm-12" style="line-break: anywhere;">
+                                    <label>{{data?.description}}</label>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
             </div>
          </div>
       </nb-card-body>

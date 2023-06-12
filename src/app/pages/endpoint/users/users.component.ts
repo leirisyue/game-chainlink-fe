@@ -21,15 +21,12 @@ import { UsersFormComponent } from '../users-form/users-form.component';
 })
 export class UsersComponent implements OnInit {
 
-  displayedColumns = ['id', 'userLogin', 'userEmail', 'displayName', 'createdDate', 'option']
+  displayedColumns = ['id', 'userLogin', 'displayName', 'createdDate', 'option']
   dataSource = new MatTableDataSource<UserAccountDto>()
   selection = new SelectionModel<UserAccountDto>(true, [])
   @ViewChild(MatSort, { static: false }) sort: MatSort
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator
-  items = [
-    { title: VIEW, id: VIEW },
-    { title: DELETE, id: DELETE },
-  ]
+
   sub: Subscription
   constructor(
     private usersService: UsersService,
@@ -42,14 +39,8 @@ export class UsersComponent implements OnInit {
 
   async ngOnInit() {
     await this.findAll()
-    for (const iterator of this.items) {
-      this.translateService.get('Button.' + iterator.title).subscribe(data => {
-        if (!data.includes('Button')) {
-          iterator.title = data
-        }
-      })
-    }
-    this.onClickContextMenu()
+
+    // this.onClickContextMenu()
   }
   public async findAll() {
     this.selection.clear()
@@ -86,7 +77,6 @@ export class UsersComponent implements OnInit {
   //--------------------------------------------------------------------------------------------------
   private onClickContextMenu() {
     this.sub = this.nbMenuService.onItemClick().subscribe((menuBag: any) => {
-      console.log("Record Id: ", menuBag.tag, menuBag.item);
       if (menuBag.item.id === UPDATE) {
         this.openForm(menuBag.tag.id)
       } else if (menuBag.item.id === DELETE) {
@@ -97,6 +87,11 @@ export class UsersComponent implements OnInit {
     });
   }
   //--------------------------------------------------------------------------------------------------
+  openFormView(id) {
+    this.router.navigateByUrl(`pages/endpoint/users-authenticators/${id}`);
+
+  }
+  //--------------------------------------------------------------------------------------------------
   openForm(data?: UserAccountDto) {
     const dialogRef = this.dialogService.open(UsersFormComponent, {
       context: { data: data || new UserAccountDto() },
@@ -105,8 +100,12 @@ export class UsersComponent implements OnInit {
     dialogRef.onClose.subscribe(() => this.findAll());
   }
   async deleteUserAccount(id: string) {
-    await this.usersService.deleteUserAccount(id).toPromise().then(() => {
-      this.messageService.successByType(DELETE)
-    })
+    const isYes = await this.messageService.getSwal(`Bạn muốn xóa người dùng này? <br> \"Tất cả thiết bị của người dùng này cũng sẽ bị xóa khỏi hệ thống\"`)
+    if (isYes) {
+      await this.usersService.deleteUserAccount(id).toPromise().then(() => {
+        this.messageService.successByType(DELETE)
+        this.findAll()
+      })
+    }
   }
 }

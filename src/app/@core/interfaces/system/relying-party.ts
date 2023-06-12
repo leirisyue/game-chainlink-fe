@@ -6,6 +6,7 @@ export class RelyingPartyDto {
    name: string
    origin: string
    subdomains: []
+   origins: []
    ports: []
    description: string
    createdDate: Date
@@ -15,7 +16,14 @@ export class RelyingPartyDto {
 
 export class RelyingPartyUpdateForm {
    name: string
+   origin: string
+   description: string
+}
+
+
+export class EndpointInfoUpdateForm {
+   name: string
    subdomains: string[]
    ports: number[]
-   description: string
+
 }

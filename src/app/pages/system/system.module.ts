@@ -17,7 +17,6 @@ import { MatDividerModule } from '@angular/material/divider';
 import { RelyingPartyComponent } from './relying-party/relying-party.component';
 import { PackagesComponent } from './packages/packages.component';
 import { ReplyingPartyFormComponent } from './replying-party-form/replying-party-form.component';
-import { PackagesFormComponent } from './packages-form/packages-form.component';
 
 
 @NgModule({
@@ -25,8 +24,7 @@ import { PackagesFormComponent } from './packages-form/packages-form.component';
     SystemComponent,
     RelyingPartyComponent,
     PackagesComponent,
-    ReplyingPartyFormComponent,
-    PackagesFormComponent
+    ReplyingPartyFormComponent
   ],
   imports: [
     SharedModule,

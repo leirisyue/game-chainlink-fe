@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NbDialogRef } from '@nebular/theme';
-import { RelyingPartyDto, RelyingPartyUpdateForm } from '../../../@core/interfaces/system/relying-party';
+import { EndpointInfoUpdateForm, RelyingPartyDto, RelyingPartyUpdateForm } from '../../../@core/interfaces/system/relying-party';
 import { UPDATE } from '../../../@core/interfaces/variable';
 import { InfoService } from '../../../@core/services/endpoint/info.service';
 import { MessageService } from '../../../@core/utils/message.service';
@@ -15,7 +15,7 @@ export class InfoFormComponent implements OnInit {
   @Input() data: RelyingPartyDto;
   listSub: string
   listPort: string
-  input: RelyingPartyUpdateForm = new RelyingPartyUpdateForm()
+  input: EndpointInfoUpdateForm = new EndpointInfoUpdateForm()
 
   constructor(
     protected ref: NbDialogRef<InfoFormComponent>,
@@ -42,7 +42,6 @@ export class InfoFormComponent implements OnInit {
   async update() {
     let isError = false
     this.input.name = this.data.name
-    this.input.description = this.data.description
 
     if (this.listPort) {
       let ports = this.listPort?.toString().split(',').map(function (item) {

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { HttpService } from '../../backend/common/api/http.service';
-import { RelyingPartyDto } from '../../interfaces/system/relying-party';
+import { RelyingPartyDto, RelyingPartyUpdateForm } from '../../interfaces/system/relying-party';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +25,10 @@ export class RelyingPartyService {
 
   deleteRelyingParty(id: string): Observable<RelyingPartyDto> {
     return this.api.delete(this.path + `/${id}`)
+  }
+
+  updateRelyingParty(form: RelyingPartyUpdateForm, id: string): Observable<RelyingPartyDto> {
+    return this.api.put(this.path + `/${id}`, form)
   }
 
   updateRelyingPartyStatusActive(id: string): Observable<RelyingPartyDto> {

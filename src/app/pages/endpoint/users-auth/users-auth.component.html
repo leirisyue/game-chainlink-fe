@@ -12,16 +12,12 @@
       <div>
          <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]" [pageSize]="10" class="float-right"
             showFirstLastButtons></mat-paginator>
-         <div class="col-sm-6 gap-none">
-            <div class="row">
-               <div class="form-group col-sm-6">
-                  <nb-form-field>
-                     <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
-                     <input nbInput status="primary" placeholder="{{'Global.Search' | translate}}"
-                        (keyup)="doFilter($event.target.value)">
-                  </nb-form-field>
-               </div>
-            </div>
+         <div class="col-sm-4 gap-none">
+            <nb-form-field>
+               <nb-icon nbPrefix icon="search-outline" pack="eva"></nb-icon>
+               <input nbInput status="primary" placeholder="{{'Global.Search' | translate}}"
+                  (keyup)="doFilter($event.target.value)">
+            </nb-form-field>
          </div>
       </div>
       <table id="matTable" [dataSource]="dataSource" mat-table matSort>
@@ -49,21 +45,31 @@
          </ng-container>
          <ng-container matColumnDef="createdDate">
             <th *matHeaderCellDef mat-header-cell mat-sort-header>{{'Date.createdDate' | translate}}</th>
-            <td *matCellDef="let item" mat-cell nbTooltip="{{item.createdDate | date:'dd/MM/yyyy'}}">
-               {{item.createdDate | date:'dd/MM/yyyy'}}</td>
+            <td *matCellDef="let item" mat-cell nbTooltip="{{item.createdDate | date: 'dd/MM/yyyy hh:mm:ss '}}">
+               {{item.createdDate | date: 'dd/MM/yyyy hh:mm:ss '}}</td>
          </ng-container>
          <ng-container matColumnDef="lastAccess">
             <th *matHeaderCellDef mat-header-cell mat-sort-header>{{'Date.lastAccess' | translate}}</th>
-            <td *matCellDef="let item" mat-cell nbTooltip="{{item.lastAccess | date:'dd/MM/yyyy'}}">
-               {{item.lastAccess | date:'dd/MM/yyyy'}}</td>
+            <td *matCellDef="let item" mat-cell nbTooltip="{{item.lastAccess | date: 'dd/MM/yyyy hh:mm:ss '}}">
+               {{item.lastAccess | date: 'dd/MM/yyyy hh:mm:ss '}}</td>
          </ng-container>
          <ng-container matColumnDef="option">
             <th *matHeaderCellDef mat-header-cell>{{'Global.Option' | translate}}</th>
             <td *matCellDef="let item" mat-cell>
-               <button nbButton ghost [nbContextMenu]="items" [nbContextMenuTag]="item"
-                  nbContextMenuTrigger="click" >
-                  <nb-icon icon="more-vertical-outline"></nb-icon>
-               </button>
+               <div style="right: 0;">
+                  <button nbButton ghost [matMenuTriggerFor]="menuUserAuth">
+                     <nb-icon icon="more-vertical-outline"></nb-icon>
+                  </button>
+                  <mat-menu #menuUserAuth="matMenu">
+                     <button mat-menu-item (click)="openForm(item)" class="text-center min-width-160">
+                        <span>{{'Button.VIEWDETAIL' | translate}}</span>
+                     </button>
+                     <button mat-menu-item (click)="deleteUserAccount(item?.id)"
+                        class="text-center min-width-160">
+                        <span>{{'Button.DeleteDevice' | translate}}</span>
+                     </button>
+                  </mat-menu>
+               </div>
             </td>
          </ng-container>
          <ng-container matColumnDef="select">

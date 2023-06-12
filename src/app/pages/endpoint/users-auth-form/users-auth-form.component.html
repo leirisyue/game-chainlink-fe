@@ -36,7 +36,6 @@
                <input nbInput fullWidth value="{{data.createdDate}}" name="createdDate" readonly>
             </div> -->
             <div class="col-sm-12">
-
                <div class="p-10-bottom">
                   <div class="col-sm-12 p-0 m-0">
                      <div class="col-sm-12 row p-0 m-0">
@@ -68,22 +67,18 @@
                            <mat-divider></mat-divider>
                            <div class="col-sm-12 row pt-2 pb-2">
                               <div class="col-md-3 col-sm-12 text-md-right ">{{'Date.lastAccess' | translate}}</div>
-                              <div class="col-md-9 col-sm-12">{{data.lastAccess}}</div>
+                              <div class="col-md-9 col-sm-12">{{data.lastAccess | date: 'dd/MM/yyyy hh:mm:ss '}}</div>
                            </div>
                            <mat-divider></mat-divider>
                            <div class="col-sm-12 row pt-2 pb-2">
                               <div class="col-md-3 col-sm-12 text-md-right ">{{'Date.createdDate' | translate}} </div>
-                              <div class="col-md-9 col-sm-12">{{data.createdDate}}</div>
+                              <div class="col-md-9 col-sm-12">{{data.createdDate | date: 'dd/MM/yyyy hh:mm:ss '}}</div>
                            </div>
                         </div>
                      </div>
                   </div>
                </div>
-
-
             </div>
-
-
          </div>
       </nb-card-body>
       <nb-card-footer>

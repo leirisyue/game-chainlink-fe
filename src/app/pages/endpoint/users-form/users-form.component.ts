@@ -14,6 +14,7 @@ export class UsersFormComponent implements OnInit {
 
   @Input() data: UserAccountDto;
   dataInput: UserAccountCreateForm = new UserAccountCreateForm()
+  view = false
   constructor(
     protected ref: NbDialogRef<UsersFormComponent>,
     private usersService: UsersService,
@@ -21,6 +22,10 @@ export class UsersFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log(this.data)
+    if (this.data && this.data.id) {
+      this.view = true
+    }
   }
 
   async submit(form: UserAccountCreateForm) {
