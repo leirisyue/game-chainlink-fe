@@ -12,8 +12,7 @@ export enum LoginType {
 export enum PackageType {
   TIME = 'TIME',
   USER = 'USER',
-  SUBDOMAIN = 'SUBDOMAIN',
-  PORT = 'PORT'
+  SUBDOMAIN = 'SUBDOMAIN'
 }
 
 export enum LocalKey {
@@ -23,7 +22,7 @@ export enum LocalKey {
 
 export enum Role {
   SYSTEM = 'system',
-  ADMIN = 'ROLE_ADMIN',
+  ADMIN = 'admin',
   USER = 'user',
   All = 'all'
 }

@@ -1,9 +1,9 @@
-<div class="top-margin">
+<!-- <div class="top-margin">
 	<mat-grid-list cols="2" rowHeight="70px">
-		<mat-grid-tile *ngFor="let option of option| async; let i=index">
+		<mat-grid-tile *ngFor="let option of options| async; let i=index">
 			<mat-form-field class="example-form-field">
 				<mat-label>Developer {{i + 1 }}</mat-label>
-				<input matInput type="text" [(ngModel)]="option" />
+				<input matInput type="text" [(ngModel)]="option" name="optionInput" #optionInput="ngModel"/>
 
 				<button mat-button *ngIf="option" matSuffix mat-icon-button aria-label="Clear" (click)="deleteOpt(option)">
 					<mat-icon>close</mat-icon>
@@ -17,7 +17,7 @@
 
 	<mat-form-field class="example-form-field">
 		<mat-label>Add Developer</mat-label>
-		<input matInput type="text" [(ngModel)]="newDeveloper" />
+		<input matInput type="text" [(ngModel)]="newDeveloper" name="developerInput" #developerInput="ngModel"/>
 
 
 	</mat-form-field>
@@ -25,4 +25,4 @@
 		[disabled]="!newDeveloper">
 		<mat-icon>add</mat-icon>
 	</button>
-</div>
+</div> -->

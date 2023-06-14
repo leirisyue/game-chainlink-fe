@@ -12,11 +12,11 @@ import { SeparatorModule } from '../../pipes/separator/separator.module';
 import { SystemRoutingModule } from './system-routing.module';
 import { SystemComponent } from './system.component';
 import { MatStepperModule } from '@angular/material/stepper';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDividerModule } from '@angular/material/divider';
 import { RelyingPartyComponent } from './relying-party/relying-party.component';
 import { PackagesComponent } from './packages/packages.component';
 import { ReplyingPartyFormComponent } from './replying-party-form/replying-party-form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({

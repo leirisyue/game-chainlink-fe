@@ -1,0 +1,45 @@
+<h3 id="title" class="title">{{'Button.SignIn' | translate}}</h3>
+
+<form [formGroup]="loginForm" (ngSubmit)="startLogin()">
+
+   <div class="form-control-group my-3">
+      <label class="label" for="input-email">clientId</label>
+         <div class="form-group col-sm-3">
+            <label class="label">{{'relying.relying-party'|translate}}</label>
+            <nb-select fullWidth id="input-username" formControlName="username">
+               <nb-option *ngFor="let item of listReplyingParty" [value]="item.id">{{item.name}}</nb-option>
+            </nb-select>
+         </div>
+   </div>
+
+
+   <div class="form-control-group my-3">
+      <label class="label" for="input-username">Username</label>
+      <input nbInput fullWidth id="input-username" formControlName="username"
+         [status]="username.dirty ? (username.invalid  ? 'danger' : 'success') : 'basic'"
+         [attr.aria-invalid]="username.invalid && username.touched ? true : null">
+      <ngx-validation-message label="{{'Global.username' | translate}}"
+         [showPattern]="username?.hasError('pattern') && username.touched"
+         [showRequired]="username?.errors?.required && username.touched"></ngx-validation-message>
+   </div>
+
+   <div class="form-control-group my-3">
+      <label class="label" for="input-password">Password</label>
+      <nb-form-field>
+         <input nbInput fullWidth id="input-password" formControlName="password"
+            [status]="password.dirty ? (password.invalid  ? 'danger' : 'success') : 'basic'"
+            [attr.aria-invalid]="password.invalid && password.touched ? true : null">
+      </nb-form-field>
+      <ngx-validation-message label="password"
+         [showPattern]="password?.hasError('pattern') && password.touched"
+         [showRequired]="password?.errors?.required && password.touched"></ngx-validation-message>
+   </div>
+
+   <div class="form-control-group accept-group my-3">
+      <nb-checkbox formControlName="rememberMe" name="rememberMe">{{'Button.RememberLogin' |translate}}</nb-checkbox>
+   </div>
+
+   <button nbButton type="submit" fullWidth status="primary" size="large" class="my-3" [disabled]="!loginForm.valid">
+      {{'Button.SignIn' | translate}}
+   </button>
+</form>

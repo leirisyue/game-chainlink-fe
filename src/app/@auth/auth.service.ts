@@ -27,8 +27,13 @@ export class AuthService {
   }
 
   generateEndpointAccessToken(data: any): Observable<AccessToken> {
-    this.subject = Role.USER
+    this.subject = Role.ADMIN
     return this.api.post(this.path + '/endpoint/access-token', data)
+  }
+
+  generateCustomerAccessToken(data: any): Observable<AccessToken> {
+    this.subject = Role.USER
+    return this.api.post(this.path + '/customer/access-token', data)
   }
 
   loginSystem(form) {

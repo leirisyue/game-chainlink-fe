@@ -14,7 +14,7 @@ export class PackageService {
     private api: HttpService,
   ) { }
 
-  createRelyingPartyPackage(form: PackageDto): Observable<PackageDto[]> {
+  createRelyingPartyPackage(form: PackageDto): Observable<PackageDto> {
     return this.api.post(this.path, form)
   }
 

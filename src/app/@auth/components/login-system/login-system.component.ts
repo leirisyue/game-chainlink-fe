@@ -1,9 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import {
-  NbAuthSocialLink, NB_AUTH_OPTIONS
-} from '@nebular/auth';
+import { NbAuthSocialLink, NB_AUTH_OPTIONS } from '@nebular/auth';
 import { NbDialogService, NbThemeService } from '@nebular/theme';
 import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -12,6 +9,7 @@ import { AuthService } from '../../auth.service';
 import { getDeepFromObject } from '../../helpers';
 import { MessageService } from '../../../@core/utils/message.service';
 import { CookieService } from 'ngx-cookie-service';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'ngx-login',
@@ -85,10 +83,7 @@ export class NgxLoginSystemComponent implements OnInit {
         this.authService.storeTokens(response)
         console.log(response.subject)
         if (response.subject) {
-          this.authService.subject = response.subject
           this.router.navigate(['/dashboard'], { replaceUrl: true })
-          // } else {
-          //   this.router.navigate(['/home'], { replaceUrl: true })
         }
       } else {
         this.messageService.errorByText(response.subject)

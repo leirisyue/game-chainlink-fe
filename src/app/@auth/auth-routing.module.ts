@@ -13,6 +13,7 @@ import {
   NgxResetPasswordComponent
 } from './components';
 import { NgxActivateAccountComponent } from './components/activate-account/activate-account.component';
+import { NgxCustomerComponent } from './components/login-customer/login-customer.component';
 
 const routes: Routes = [{
   path: '',
@@ -29,8 +30,13 @@ const routes: Routes = [{
       // data: { title: 'Login' },
     },
     {
-      path: 'login',
+      path: 'login-admin',
       component: NgxLoginComponent
+      // data: { title: 'Login' },
+    },
+    {
+      path: 'login',
+      component: NgxCustomerComponent
       // data: { title: 'Login' },
     }
   ],

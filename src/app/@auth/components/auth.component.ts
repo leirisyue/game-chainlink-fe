@@ -22,7 +22,7 @@ import { I18nService } from '../../@core/utils/i18n.service';
             <div class="pyramid"></div>
             <div class="col-sm-5 align-self-center">
               <div style="z-index: 2;">
-                <h1 class="text-black text-center mr-5">STID FIDO2 System</h1>
+                <h1 class="text-black text-center mr-5">Welcome</h1>
               </div>
             </div>
             <div class="col-sm-7 align-self-center" style="z-index: 2;">

@@ -1,4 +1,4 @@
-export const PROJECT_NAME = 'STID FIDO2 System'
+export const PROJECT_NAME = 'System'
 
 // LocalStorage
 export const LOGGED_ID_KEY = 'Subject'

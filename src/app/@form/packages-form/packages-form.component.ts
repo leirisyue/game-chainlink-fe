@@ -37,24 +37,31 @@ export class PackagesFormComponent implements OnInit {
   }
 
   private async create(form: PackageDto) {
+    this.idReplyingParty = this.data.relyingPartyId
     if (form.type === PackageType.TIME) {
       let timePlus = this.changeAmountMillisecond(form.typeLicense)
       form.amount = form.amount * timePlus
     }
     await this.packageService.createRelyingPartyPackage(form).toPromise()
-      .then(() => {
+      .then((data) => {
         this.messageService.successByType(CREATE)
+        this.data = data
+        this.data.relyingPartyId = this.idReplyingParty
         this.close()
       })
   }
 
   private async update(form: PackageDto) {
+    this.idReplyingParty = this.data.relyingPartyId
     if (form.type === PackageType.TIME) {
       let timePlus = this.changeAmountMillisecond(form.typeLicense)
       form.amount = form.amount * timePlus
     }
     await this.packageService.updateRelyingPartyPackage(form, this.data.id).toPromise()
-      .then(() => {
+      .then((data) => {
+        console.log("🚀 ~ .then ~ data:", data);
+        this.data = data
+        this.data.relyingPartyId = this.idReplyingParty
         this.messageService.successByType(UPDATE)
         this.close()
       })

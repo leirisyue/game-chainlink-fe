@@ -8,7 +8,6 @@ import { NgxLoginSystemComponent } from './components/login-system/login-system.
 import { CommonModule } from '@angular/common';
 import { HttpRequest, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 import {
   NbAuthModule, NbTokenLocalStorage
 } from '@nebular/auth';
@@ -31,6 +30,8 @@ import { RegisterBusinessComponent } from './components/register/register-busine
 import { RegisterUserComponent } from './components/register/register-user/register-user.component';
 import { CanActivateViaLoginGuard } from './login-guard';
 import { NbDateFnsDateModule } from '@nebular/date-fns';
+import { NgxCustomerComponent } from './components/login-customer/login-customer.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const GUARDS = [AuthGuard, CanActivateViaLoginGuard];
 const COMPONENTS = [
@@ -42,7 +43,8 @@ const COMPONENTS = [
   NgxRequestPasswordComponent,
   NgxResetPasswordComponent,
   NgxActivateAccountComponent,
-  NgxLoginSystemComponent
+  NgxLoginSystemComponent,
+  NgxCustomerComponent
 ];
 
 const NB_MODULES = [

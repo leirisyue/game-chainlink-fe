@@ -14,17 +14,17 @@ export class DataService {
   ];
 
   optionSource: BehaviorSubject<String[]>;
-  option;
+  options;
 
   winnersSource: BehaviorSubject<String[]>;
-  winner$: Observable<String[]>;
+  winners: Observable<String[]>;
 
   constructor() {
     this.optionSource = new BehaviorSubject(this.getOptions());
-    this.option = this.optionSource.asObservable();
+    this.options = this.optionSource.asObservable();
 
     this.winnersSource = new BehaviorSubject([]);
-    this.winner$ = this.winnersSource.asObservable();
+    this.winners = this.winnersSource.asObservable();
   }
 
   addNewOption(value) {

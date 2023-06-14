@@ -1,16 +1,12 @@
 import { NgModule } from "@angular/core";
-import { BrowserModule } from "@angular/platform-browser";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { MatInputModule } from "@angular/material/input";
 import { MatIconModule } from "@angular/material/icon";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatGridListModule } from "@angular/material/grid-list";
 import { ClipboardModule } from "@angular/cdk/clipboard";
 import { MatButtonModule } from "@angular/material/button";
 import { ClipTextComponent } from "./game/clip-text/clip-text.component";
 import { DataService } from "./game/data.service";
-import { OptionsComponent } from "./game/options/options.component";
 import { WheelComponent } from "./game/wheel/wheel.component";
 import { GameComponent } from "./game/game.component";
 import { MatDividerModule } from "@angular/material/divider";
@@ -27,6 +23,10 @@ import { FormsComponentsModule } from "../../@form/form-components.module";
 import { SeparatorModule } from "../../pipes/separator/separator.module";
 import { SystemRoutingModule } from "../system/system-routing.module";
 import { UserComponent } from "./user.component";
+import { OptionsComponent } from "./game/options/options.component";
+import { BrowserModule } from "@angular/platform-browser";
+import { FormsModule } from "@angular/forms";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const GameModuleImport = [
   BrowserModule,
@@ -63,7 +63,6 @@ const PageModuleImport = [
   NbButtonGroupModule,
   FormsComponentsModule,
   MatStepperModule,
-  ReactiveFormsModule,
   MatDividerModule
 ]
 

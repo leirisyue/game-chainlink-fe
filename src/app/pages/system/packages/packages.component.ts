@@ -129,9 +129,10 @@ export class PackagesComponent implements OnInit {
       context: { data: data || new PackageDto() },
       closeOnBackdropClick: false,
     });
-    dialogRef.onClose.subscribe(() => {
-      if (this.idReplyingParty) {
-        this.changeReplyingParty(this.idReplyingParty)
+    dialogRef.onClose.subscribe((data) => {
+      if (data.relyingPartyId) {
+        this.idReplyingParty = data.relyingPartyId
+        this.changeReplyingParty(data.relyingPartyId)
       }
     });
   }

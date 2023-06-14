@@ -9,29 +9,31 @@ import { AuthService } from '../../auth.service';
 import { getDeepFromObject } from '../../helpers';
 import { MessageService } from '../../../@core/utils/message.service';
 import { CookieService } from 'ngx-cookie-service';
-import { Role } from '../../../@core/interfaces/enum';
+import { Role, Status } from '../../../@core/interfaces/enum';
 import { UntypedFormGroup, UntypedFormBuilder } from '@angular/forms';
+import { RelyingPartyDto } from '../../../@core/interfaces/system/relying-party';
+import { CustomService } from '../../../@core/services/custom.service';
+
 
 @Component({
-  selector: 'ngx-login',
-  templateUrl: './login.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'ngx-login-customer',
+  templateUrl: './login-customer.component.html'
 })
+export class NgxCustomerComponent implements OnInit {
 
-export class NgxLoginComponent implements OnInit {
-
-  minLength: number = this.getConfigValue('forms.validation.clientSecret.minLength');
-  maxLength: number = this.getConfigValue('forms.validation.clientSecret.maxLength');
-  redirectDelay: number = this.getConfigValue('forms.clientId.redirectDelay');
-  showMessages: any = this.getConfigValue('forms.clientId.showMessages');
-  strategy: string = this.getConfigValue('forms.clientId.strategy');
-  socialLinks: NbAuthSocialLink[] = this.getConfigValue('forms.clientId.socialLinks');
-  remember = this.getConfigValue('forms.clientId.remember');
+  minLength: number = this.getConfigValue('forms.validation.username.minLength');
+  maxLength: number = this.getConfigValue('forms.validation.username.maxLength');
+  redirectDelay: number = this.getConfigValue('forms.password.redirectDelay');
+  showMessages: any = this.getConfigValue('forms.password.showMessages');
+  strategy: string = this.getConfigValue('forms.password.strategy');
+  socialLinks: NbAuthSocialLink[] = this.getConfigValue('forms.password.socialLinks');
+  remember = this.getConfigValue('forms.password.remember');
   errors: string[] = [];
   messages: string[] = [];
   loginForm: UntypedFormGroup;
-  get clientId() { return this.loginForm.get('clientId'); }
-  get clientSecret() { return this.loginForm.get('clientSecret'); }
+  get username() { return this.loginForm.get('username'); }
+  get password() { return this.loginForm.get('password'); }
+  listReplyingParty: RelyingPartyDto[] = []
 
   constructor(
     protected authService: AuthService,
@@ -45,18 +47,20 @@ export class NgxLoginComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private messageService: MessageService,
     private cookieService: CookieService,
+    private customService: CustomService,
   ) {
     if (this.authService.isAuthenticated() && localStorage.getItem(DATABASE_ID) && this.cookieService.get(DATABASE_ID)) {
       this.router.navigateByUrl('pages/dashboard');
     }
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    await this.findAllRelyingParty()
     this.loginForm = this.fb.group({
-      clientId: this.fb.control(''),
-      clientSecret: this.fb.control(''),
+      username: this.fb.control(''),
+      password: this.fb.control(''),
       timeoutInSeconds: this.fb.control(0),
-      rememberMe: this.fb.control(false),
+      relyingPartyId: this.fb.control(''),
     });
   }
 
@@ -71,7 +75,7 @@ export class NgxLoginComponent implements OnInit {
     }
     const data = JSON.stringify(this.loginForm.value);
 
-    this.authService.generateEndpointAccessToken(data).subscribe(response => {
+    this.authService.generateCustomerAccessToken(data).subscribe(response => {
       if (response.token) {
         this.authService.storeTokens(response)
         if (response.subject) {
@@ -87,6 +91,17 @@ export class NgxLoginComponent implements OnInit {
     return getDeepFromObject(this.options, key, null);
   }
 
+  public async findAllRelyingParty() {
+    await this.customService.findAllRelyingParty().toPromise().then(data => {
+      data = data.sort((a, b) => new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime())
+      for (const iterator of data) {
+        iterator.filter = ''
+      }
+      this.listReplyingParty = data.filter(f => f.status !== Status.DELETED)
+    })
+  }
+
   ngOnDestroy(): void {
   }
+
 }

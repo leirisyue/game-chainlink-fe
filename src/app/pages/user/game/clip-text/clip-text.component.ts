@@ -3,8 +3,8 @@ import { DataService } from "../data.service";
 
 @Component({
   selector: 'ngx-clip-text',
-  templateUrl: "./clip-text.component.html",
-  styleUrls: ["./clip-text.component.css"]
+  templateUrl: './clip-text.component.html',
+  styleUrls: ['./clip-text.component.scss']
 })
 export class ClipTextComponent implements OnInit {
   constructor(private dataService: DataService) { }
@@ -12,7 +12,7 @@ export class ClipTextComponent implements OnInit {
   value = "";
 
   ngOnInit() {
-    this.dataService.winner$.subscribe(winners => {
+    this.dataService.winners.subscribe(winners => {
       let text = `PRs \n`;
 
       winners.forEach((winner, i) => (text += `${i + 1}. ${winner}\n`));
