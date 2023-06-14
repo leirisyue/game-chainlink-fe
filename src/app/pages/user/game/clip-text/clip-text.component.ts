@@ -7,15 +7,19 @@ import { DataService } from "../data.service";
   styleUrls: ['./clip-text.component.scss']
 })
 export class ClipTextComponent implements OnInit {
-  constructor(private dataService: DataService) { }
+  constructor(public dataService: DataService) { }
 
   value = "";
+  list = []
 
   ngOnInit() {
     this.dataService.winners.subscribe(winners => {
+      this.list = []
       let text = `PRs \n`;
-
-      winners.forEach((winner, i) => (text += `${i + 1}. ${winner}\n`));
+      winners.forEach((winner, i) => {
+        (text += `${i + 1}. ${winner}\n`)
+        this.list.push(winner)
+      });
       this.value = text;
     });
   }

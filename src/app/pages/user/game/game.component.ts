@@ -11,7 +11,9 @@ export class GameComponent implements OnInit {
 
   constructor(public dataService: DataService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    console.log('test')
+  }
 
   resetWheel() {
     this.dataService.resetToDefault();

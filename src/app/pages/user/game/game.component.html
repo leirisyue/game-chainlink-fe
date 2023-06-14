@@ -1,12 +1,22 @@
-<div>
+<!-- <div>
 	<button mat-mini-fab aria-label="reset" (click)="resetWheel()">
 		<mat-icon>refresh</mat-icon>
 	</button>
+</div> -->
+<div class="col-sm-12">
+	<div class="row">
+		<div class="col-sm-8">
+			<div style="display: flex; justify-content: center; align-items: center">
+				<ngx-wheel [options]="dataService.options | async"></ngx-wheel>
+			</div>
+		</div>
+		<div class="col-sm-4">
+			<ngx-clip-text></ngx-clip-text>
+		</div>
+	</div>
 </div>
-<div style="display: flex; justify-content: center; align-items: center">
-	<ngx-wheel  [options]="dataService.options | async"></ngx-wheel>
-</div>
+
 <div>
-	<ngx-clip-text></ngx-clip-text>
+
 </div>
 <ngx-options></ngx-options>

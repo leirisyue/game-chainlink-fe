@@ -32,7 +32,7 @@ export class PagesMenu {
       {
         title: 'Endpoint',
         icon: 'bar-chart-2',
-        data: Role.USER,
+        data: Role.ADMIN,
         expanded: true,
         children: [
           {
@@ -42,6 +42,18 @@ export class PagesMenu {
             title: 'Log',
             link: '/pages/endpoint/log',
           },
+        ],
+      },
+      {
+        title: 'User',
+        icon: 'bar-chart-2',
+        data: Role.USER,
+        expanded: true,
+        children: [
+          {
+            title: 'game',
+            link: '/pages/user/game',
+          }
         ],
       },
     ]

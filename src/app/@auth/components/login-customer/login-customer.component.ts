@@ -21,18 +21,20 @@ import { CustomService } from '../../../@core/services/custom.service';
 })
 export class NgxCustomerComponent implements OnInit {
 
-  minLength: number = this.getConfigValue('forms.validation.username.minLength');
-  maxLength: number = this.getConfigValue('forms.validation.username.maxLength');
-  redirectDelay: number = this.getConfigValue('forms.password.redirectDelay');
-  showMessages: any = this.getConfigValue('forms.password.showMessages');
-  strategy: string = this.getConfigValue('forms.password.strategy');
-  socialLinks: NbAuthSocialLink[] = this.getConfigValue('forms.password.socialLinks');
-  remember = this.getConfigValue('forms.password.remember');
+  minLength: number = this.getConfigValue('forms.validation.password.minLength');
+  maxLength: number = this.getConfigValue('forms.validation.password.maxLength');
+  redirectDelay: number = this.getConfigValue('forms.username.redirectDelay');
+  showMessages: any = this.getConfigValue('forms.username.showMessages');
+  strategy: string = this.getConfigValue('forms.username.strategy');
+  socialLinks: NbAuthSocialLink[] = this.getConfigValue('forms.username.socialLinks');
+  remember = this.getConfigValue('forms.username.remember');
   errors: string[] = [];
   messages: string[] = [];
   loginForm: UntypedFormGroup;
   get username() { return this.loginForm.get('username'); }
   get password() { return this.loginForm.get('password'); }
+
+
   listReplyingParty: RelyingPartyDto[] = []
 
   constructor(
@@ -54,20 +56,21 @@ export class NgxCustomerComponent implements OnInit {
     }
   }
 
-  async ngOnInit() {
-    await this.findAllRelyingParty()
+  ngOnInit(): void {
+    this.findAllRelyingParty()
     this.loginForm = this.fb.group({
       username: this.fb.control(''),
       password: this.fb.control(''),
       timeoutInSeconds: this.fb.control(0),
-      relyingPartyId: this.fb.control(''),
+      rememberMe: this.fb.control(false),
+      relyingPartyId: this.fb.control('')
     });
   }
 
   startLogin() {
     let rememberMe = this.loginForm.get('rememberMe').value
-    this.loginForm.value.clientId = this.loginForm.value.clientId.replaceAll(' ', '')
-    this.loginForm.value.clientSecret = this.loginForm.value.clientSecret.replaceAll(' ', '')
+    this.loginForm.value.username = this.loginForm.value.username.replaceAll(' ', '')
+    this.loginForm.value.password = this.loginForm.value.password.replaceAll(' ', '')
     if (rememberMe) {
       this.loginForm.value.timeoutInSeconds = 86400
     } else {
@@ -91,8 +94,8 @@ export class NgxCustomerComponent implements OnInit {
     return getDeepFromObject(this.options, key, null);
   }
 
-  public async findAllRelyingParty() {
-    await this.customService.findAllRelyingParty().toPromise().then(data => {
+  public findAllRelyingParty() {
+    this.customService.findAllRelyingParty().toPromise().then(data => {
       data = data.sort((a, b) => new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime())
       for (const iterator of data) {
         iterator.filter = ''
@@ -101,7 +104,7 @@ export class NgxCustomerComponent implements OnInit {
     })
   }
 
+
   ngOnDestroy(): void {
   }
-
 }

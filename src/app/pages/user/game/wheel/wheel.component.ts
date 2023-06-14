@@ -17,7 +17,6 @@ const COLORS = ["#f82", "#0bf", "#fb0", "#0fb", "#b0f", "#f0b", "#bf0"];
 })
 export class WheelComponent implements OnInit, AfterViewInit, DoCheck {
   @Input() set options(values: string[]) {
-    console.log("Values", values);
     this.sectors = values.map((opts, i) => {
       return {
         color: COLORS[(i >= COLORS.length ? i + 1 : i) % COLORS.length],
@@ -25,7 +24,6 @@ export class WheelComponent implements OnInit, AfterViewInit, DoCheck {
       };
     });
 
-    console.log(this.sectors);
     if (this.wheel) {
       this.createWheel();
     }
@@ -142,7 +140,7 @@ export class WheelComponent implements OnInit, AfterViewInit, DoCheck {
       this.spin.nativeElement.textContent = this.sectors[
         this.lastSelection
       ].label;
-      this.sectors.splice(this.lastSelection, 1);
+      // this.sectors.splice(this.lastSelection, 1);
       setTimeout(() => {
         this.createWheel();
       }, 1200);

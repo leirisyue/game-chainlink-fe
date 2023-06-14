@@ -4,13 +4,12 @@ import { BehaviorSubject, Observable } from "rxjs";
 @Injectable()
 export class DataService {
   _defaultOpts = [
-    "Diego",
-    "Ignacio",
-    "JaviGo",
-    "Mendi",
-    "Sergio",
-    "Virginia",
-    "Tod@s"
+    "Deal 20%",
+    "Deal 10%",
+    "Unlucky",
+    "Gift",
+    "-10.000đ",
+    "-20.000đ"
   ];
 
   optionSource: BehaviorSubject<String[]>;
@@ -56,7 +55,7 @@ export class DataService {
 
   getOptions(): String[] {
     const value = localStorage.getItem("OPTS");
-    return value ? JSON.parse(value) : this._defaultOpts;
+    return this._defaultOpts;
   }
 
   resetToDefault() {

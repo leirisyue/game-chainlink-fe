@@ -61,7 +61,7 @@
    </div>
 </span>
 <!-- ------------------------------------------ system works -------------------------------------------------->
-<p *ngIf="authService.subject !== role.SYSTEM">
+<p *ngIf="authService.subject == role.ADMIN">
    <nb-card>
       <nb-card-header>
          <div class="col-sm-12">
@@ -299,3 +299,4 @@
       </nb-card-body>
    </nb-card>
 </p>
+

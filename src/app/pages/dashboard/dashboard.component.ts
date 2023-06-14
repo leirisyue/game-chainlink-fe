@@ -55,10 +55,10 @@ export class DashboardComponent implements OnInit {
   }
 
   async ngOnInit() {
-    if (this.authService.subject !== Role.SYSTEM) {
+    if (this.authService.subject == Role.ADMIN) {
       await this.getInfo()
       await this.getServiceLicense()
-    } else {
+    } else if (this.authService.subject == Role.SYSTEM) {
       await this.getSystemUsage()
     }
   }

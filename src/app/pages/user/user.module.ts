@@ -24,17 +24,16 @@ import { SeparatorModule } from "../../pipes/separator/separator.module";
 import { SystemRoutingModule } from "../system/system-routing.module";
 import { UserComponent } from "./user.component";
 import { OptionsComponent } from "./game/options/options.component";
-import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from "@angular/platform-browser";
+import { UserRoutingModule } from "./user-routing.module";
 
 const GameModuleImport = [
-  BrowserModule,
   FormsModule,
   MatInputModule,
   MatIconModule,
   MatGridListModule,
-  BrowserAnimationsModule,
   ClipboardModule,
   MatButtonModule
 ]
@@ -69,7 +68,8 @@ const PageModuleImport = [
 @NgModule({
   imports: [
     GameModuleImport,
-    PageModuleImport
+    PageModuleImport,
+    UserRoutingModule
   ],
   declarations: [
     WheelComponent,
