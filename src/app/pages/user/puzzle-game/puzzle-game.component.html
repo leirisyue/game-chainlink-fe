@@ -1,21 +1,5 @@
-<div class="wrapper">
-   <div class="grid-container">
-      <span *ngFor="let tile of tiles">
-         <ng-container>
-            <div class="tile-boundary">
-               <div class="grid-item tile" [class.blank-tile]="tile.blank" [style.grid-row]="tile.boundary.row"
-                  [style.grid-column]="tile.boundary.column" cdkDrag cdkDragBoundary=".tile-boundary"
-                  [cdkDragData]="tile" [cdkDragDisabled]="tile.disabled" [cdkDragLockAxis]="tile.lockAxis"
-                  (cdkDragEnded)="dragEnd($event)">
-                  {{ tile.label }}
-               </div>
-            </div>
-         </ng-container></span>
+<div class="col-sm-12">
+   <div >
+      <ngx-number-puzzle-game [numberOfCellsHorizontally]="4"></ngx-number-puzzle-game>
    </div>
 </div>
-
-<br />
-
-<button mat-raised-button color="primary" (click)="shuffle(tiles)">
-   Shuffle
-</button>

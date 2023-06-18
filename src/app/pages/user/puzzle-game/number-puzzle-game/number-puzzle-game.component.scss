@@ -1,0 +1,28 @@
+
+
+.board {
+   position: relative;
+   background-color: #c0c0c0;
+   border-radius: 3px;
+}
+
+:host ::ng-deep .cell {
+   font-family: sans-serif;
+   font-size: xx-large;
+   position: absolute;
+   background-color: #dceeff;
+   border-color: black;
+   border-style: solid;
+   border-radius: 5px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   user-select: none;
+   cursor: pointer;
+   transition-property: left, top;
+   transition-duration: 0.05s;
+}
+
+:host ::ng-deep .cell:hover {
+   background-color: #f3f3ed;
+}

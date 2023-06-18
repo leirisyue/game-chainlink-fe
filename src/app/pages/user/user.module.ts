@@ -30,6 +30,8 @@ import { BrowserModule } from "@angular/platform-browser";
 import { UserRoutingModule } from "./user-routing.module";
 import { MemoryGameComponent } from "./memory-game/memory-game.component";
 import { CardComponent } from "./memory-game/card/card.component";
+import { NumberPuzzleGameComponent } from "./puzzle-game/number-puzzle-game/number-puzzle-game.component";
+import { PuzzleGameComponent } from "./puzzle-game/puzzle-game.component";
 
 const GameModuleImport = [
   FormsModule,
@@ -83,7 +85,9 @@ const PageModuleImport = [
     GameComponent,
     UserComponent,
     MemoryGameComponent,
-    CardComponent
+    CardComponent,
+    NumberPuzzleGameComponent,
+    PuzzleGameComponent
   ],
   bootstrap: [UserComponent, MemoryGameComponent],
   providers: [DataService]
