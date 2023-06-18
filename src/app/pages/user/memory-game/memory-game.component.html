@@ -1,0 +1,29 @@
+<div class="center col-sm-12">
+   <div class="row">
+      <div class="col">
+         <h3 class="text-center">Memory game</h3>
+      </div>
+   </div>
+   <div *ngIf="cards.length > 0">
+      <div *ngFor="let card of boardH; let w = index" class="row">
+         <div *ngFor="let card of boardW; let h = index" class="col">
+            <ngx-card [card]="cards[w*boardW.length+h]" (clicked)="handleCardClick($event)"></ngx-card>
+         </div>
+      </div>
+      <div class="row mt-4">
+         <div class="col-12" *ngIf="unsolved > 0">
+            Remaining unsolved pairs: {{unsolved}}
+         </div>
+         <div class="col-12" *ngIf="clicks == 1">
+            You have clicked {{clicks}} time
+         </div>
+         <div class="col-12" *ngIf="clicks > 1">
+            You have clicked {{clicks}} times
+         </div>
+         <div class="col-12" *ngIf="unsolved == 0">
+            <h2>YOU WON!</h2>
+            <button nbButton hero status="primary" (click)="initGame()">Play again</button>
+         </div>
+      </div>
+   </div>
+</div>

@@ -53,6 +53,12 @@ export class PagesMenu {
           {
             title: 'game',
             link: '/pages/user/game',
+          }, {
+            title: 'puzzle-game',
+            link: '/pages/user/puzzle-game',
+          }, {
+            title: 'memory-game',
+            link: '/pages/user/memory-game',
           }
         ],
       },

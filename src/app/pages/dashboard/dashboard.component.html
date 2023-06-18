@@ -1,4 +1,4 @@
-<!-- ---------------------------------------- dashboard works ------------------------------------------------->
+<!-- ---------------------------------------- system works ------------------------------------------------->
 <span *ngIf="authService.subject === role.SYSTEM">
    <div class="container text-center">
       <div class="row">
@@ -60,8 +60,8 @@
       </div>
    </div>
 </span>
-<!-- ------------------------------------------ system works -------------------------------------------------->
-<p *ngIf="authService.subject == role.ADMIN">
+<!-- ------------------------------------------ endpoint works -------------------------------------------------->
+<span *ngIf="authService.subject == role.ADMIN">
    <nb-card>
       <nb-card-header>
          <div class="col-sm-12">
@@ -298,5 +298,14 @@
          </div>
       </nb-card-body>
    </nb-card>
-</p>
+</span>
 
+<!-- ------------------------------------------ customer works -------------------------------------------------->
+<span *ngIf="authService.subject === role.USER">
+   <article style="position: relative;" (click)="routerNav('/pages/user/game')">
+      <figure><img src="https://upload.wikimedia.org/wikipedia/commons/2/22/Tibetian_Wheel.gif" alt=""></figure>
+      <div class="title">
+         <img src="../../../assets/images/vong-quay.png" class="img-title" />
+      </div>
+   </article>
+</span>

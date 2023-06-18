@@ -46,6 +46,7 @@
     "@angular/router": "14.0.3",
     "@asymmetrik/ngx-leaflet": "3.0.1",
     "@auth0/angular-jwt": "5.0.2",
+    "@chainlink/contracts": "^0.6.1",
     "@nebular/auth": "9.0.3",
     "@nebular/date-fns": "^9.0.3",
     "@nebular/eva-icons": "9.0.3",

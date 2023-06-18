@@ -1,12 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  DoCheck,
-  ElementRef,
-  Input,
-  OnInit,
-  ViewChild
-} from "@angular/core";
+import { AfterViewInit, Component, DoCheck, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
 import { DataService } from "../data.service";
 const COLORS = ["#f82", "#0bf", "#fb0", "#0fb", "#b0f", "#f0b", "#bf0"];
 
@@ -47,19 +39,17 @@ export class WheelComponent implements OnInit, AfterViewInit, DoCheck {
 
   modeDelete = true;
 
-  friction = 0.995; // 0.995=soft, 0.99=mid, 0.98=hard
-  angVel = 0; // Angular velocity
-  ang = 0; // Angle in radians
+  friction = 0.995;
+  angVel = 0;
+  ang = 0;
   lastSelection;
 
-  constructor(private dataService: DataService) { }
+  constructor(public dataService: DataService) { }
   ngDoCheck(): void {
     this.engine();
   }
 
   ngOnInit() {
-    // Initial rotation
-    // Start engine
   }
   ngAfterViewInit(): void {
     this.createWheel();
@@ -141,6 +131,7 @@ export class WheelComponent implements OnInit, AfterViewInit, DoCheck {
         this.lastSelection
       ].label;
       // this.sectors.splice(this.lastSelection, 1);
+      this.dataService.countSpin = this.dataService.countSpin - 1
       setTimeout(() => {
         this.createWheel();
       }, 1200);

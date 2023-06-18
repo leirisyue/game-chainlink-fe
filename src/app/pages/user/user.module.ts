@@ -28,6 +28,8 @@ import { FormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from "@angular/platform-browser";
 import { UserRoutingModule } from "./user-routing.module";
+import { MemoryGameComponent } from "./memory-game/memory-game.component";
+import { CardComponent } from "./memory-game/card/card.component";
 
 const GameModuleImport = [
   FormsModule,
@@ -35,8 +37,11 @@ const GameModuleImport = [
   MatIconModule,
   MatGridListModule,
   ClipboardModule,
-  MatButtonModule
+  MatButtonModule,
+
+
 ]
+
 
 const PageModuleImport = [
   SharedModule,
@@ -76,9 +81,11 @@ const PageModuleImport = [
     OptionsComponent,
     ClipTextComponent,
     GameComponent,
-    UserComponent
+    UserComponent,
+    MemoryGameComponent,
+    CardComponent
   ],
-  bootstrap: [UserComponent],
+  bootstrap: [UserComponent, MemoryGameComponent],
   providers: [DataService]
 })
 export class UserModule { }

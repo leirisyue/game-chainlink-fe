@@ -219,4 +219,20 @@ export class MessageService {
     });
     return reason
   }
+
+  winner() {
+    Swal.fire({
+      title: 'YOU WIN !!!',
+      width: 600,
+      padding: '3em',
+      color: '#716add',
+      background: '#fff url("https://media4.giphy.com/media/5jT0jaNDsM6Ik7X9yq/giphy.gif")',
+      backdrop: `
+        rgba(0,0,123,0.4)
+        url("../../../assets/images/nyan cat.gif")
+        left top
+        no-repeat
+      `
+    })
+  }
 }

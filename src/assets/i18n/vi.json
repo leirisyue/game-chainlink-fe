@@ -7,7 +7,11 @@
     "Packages": "Gói dịch vụ",
     "Users": "Người dùng",
     "Log": "Nhật ký",
-    "Endpoint": "Tác vụ"
+    "Endpoint": "Tác vụ",
+    "User":"Người dùng",
+    "game":"Wheel",
+    "puzzle-game":"Puzzle",
+    "memory-game":"Memory"
   },
   "Status": {
     "ACTIVE": "Kích hoạt",
@@ -243,7 +247,8 @@
     "origin": "Origin URL",
     "ports": "Ports",
     "subdomains": "Subdomains",
-    "ID": "ID"
+    "ID": "ID",
+    "enterprise": "Doanh nghiệp"
   },
   "User": {
     "userHandle": "Handle",

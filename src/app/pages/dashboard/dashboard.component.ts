@@ -14,11 +14,12 @@ import { InfoFormComponent } from './info-form/info-form.component';
 import humanizeDuration from 'humanize-duration';
 import { TranslateService } from '@ngx-translate/core';
 import { I18nService } from '../../@core/utils/i18n.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss', './ticket-index.component.scss']
 })
 export class DashboardComponent implements OnInit {
 
@@ -45,6 +46,7 @@ export class DashboardComponent implements OnInit {
     private configService: ConfigService,
     private translateService: TranslateService,
     public i18nService: I18nService,
+    private router: Router,
   ) {
     if (!this.i18nService.getLocaleLanguage()) {
       this.i18nService.changeLanguage(this.i18nService.language);
@@ -122,5 +124,8 @@ export class DashboardComponent implements OnInit {
       closeOnBackdropClick: false,
     });
     dialogRef.onClose.subscribe(() => this.getInfo());
+  }
+  routerNav(url: string) {
+    this.router.navigateByUrl(url)
   }
 }

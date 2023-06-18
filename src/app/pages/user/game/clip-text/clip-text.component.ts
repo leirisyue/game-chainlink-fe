@@ -4,7 +4,7 @@ import { DataService } from "../data.service";
 @Component({
   selector: 'ngx-clip-text',
   templateUrl: './clip-text.component.html',
-  styleUrls: ['./clip-text.component.scss']
+  styleUrls: ['./clip-text.component.scss', './ticket-count.component.scss', './ticket-voucher.component.scss']
 })
 export class ClipTextComponent implements OnInit {
   constructor(public dataService: DataService) { }

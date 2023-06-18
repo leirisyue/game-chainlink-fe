@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../../@auth/auth.guard';
 import { GameComponent } from './game/game.component';
+import { MemoryGameComponent } from './memory-game/memory-game.component';
+import { PuzzleGameComponent } from './puzzle-game/puzzle-game.component';
 import { UserComponent } from './user.component';
 
 const routes: Routes = [{
@@ -14,6 +16,16 @@ const routes: Routes = [{
       canActivate: [AuthGuard],
       component: GameComponent,
       data: { title: 'Game' },
+    }, {
+      path: 'puzzle-game',
+      canActivate: [AuthGuard],
+      component: PuzzleGameComponent,
+      data: { title: 'Puzzle Game' },
+    }, {
+      path: 'memory-game',
+      canActivate: [AuthGuard],
+      component: MemoryGameComponent,
+      data: { title: 'Memory Game' },
     }
   ],
 }];

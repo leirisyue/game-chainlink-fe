@@ -12,6 +12,7 @@ export class DataService {
     "-20.000đ"
   ];
 
+  countSpin = 5
   optionSource: BehaviorSubject<String[]>;
   options;
 

@@ -103,7 +103,18 @@ export class NgxCustomerComponent implements OnInit {
       this.listReplyingParty = data.filter(f => f.status !== Status.DELETED)
     })
   }
+  showPassword = false;
 
+  getInputType() {
+    if (this.showPassword) {
+      return 'text';
+    }
+    return 'password';
+  }
+
+  toggleShowPassword() {
+    this.showPassword = !this.showPassword;
+  }
 
   ngOnDestroy(): void {
   }

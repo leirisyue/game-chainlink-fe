@@ -1,29 +1,18 @@
-633d9774-62e0-4aff-8592-9b42cb8aa506
-n4X4PazyawI9-_7CUXgsFPP6CC9twO6-irhcgPeHKjwr_sg4U8tyQ1veLFcEeemj
-
-
-
-# Git global setup
-git config --global user.name "Thanh Thùy"
-git config --global user.email "lntt.thuy@gmail.com"
-
-
-# Create a new repository
-git clone https://gitlab.com/stid-dev/fido-projects/fido2_server_fe.git
-cd fido2_server_fe
-git switch -c main
-touch README.md
-git add README.md
-git commit -m "add README"
-
-# Push an existing folder
-cd existing_folder
-git init --initial-branch=main
-git remote add origin https://gitlab.com/stid-dev/fido-projects/fido2_server_fe.git
-git add .
-git commit -m "Initial commit"
-
-# Push an existing Git repository
-cd existing_repo
-git remote rename origin old-origin
-git remote add origin https://gitlab.com/stid-dev/fido-projects/fido2_server_fe.git
+Ứng dụng tạo chiến dịch khuyến mãi EVoucher
+Trang quản trị viên: (Web)
+ Chịu trách nhiệm quản lý các chiến dịch, đối tác, tài khoản, thống kê.
+Trang đối tác : (Web)
+Cho phép các đối tác :
+ + Tạo chiến dịch khuyến mãi 11/4/2023 - 21/4/2023
+ + Chọn một số trò chơi : Lắc điện thoại, Teris,....
+ - Lắc điện thoại : tạo ra số ngẫu nhiên để trúng voucher giảm giá(10%, 20%,..)
+ - Teris : tương tự phía trên.
+Khách hàng : (Mobile/Web)
+Cho phép tham gia nhiều chương trình khuyến mãi để tìm kiếm mã khuyến mãi và quản lý chúng, 
+hỗ trợ tìm kiếm và lọc các chiến dịch gần bạn, mới nhất, loại cửa hàng.
+Tính năng nâng cao : (Cộng điểm thêm)
+Tạo số ngẫu nhiên dựa trên công nghệ blockchain => Tạo ra sự minh bạch khi tạo ra số ngẫu nhiên vì số ngẫu nhiên được lưu trữ công khai trên Blockchain
+Công nghệ sử dụng:
+Kiến trúc nLayers-nTiers
+Web API : Resful API
+Tạo số ngẫu nhiên trên Blockchain => ChainLink (Web Service)
