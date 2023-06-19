@@ -11,6 +11,8 @@ export class RelyingPartyDto {
    description: string
    createdDate: Date
    status: Status
+   email: string
+   phone: string
    filter?: string
 }
 
@@ -18,6 +20,8 @@ export class RelyingPartyUpdateForm {
    name: string
    origin: string
    description: string
+   email: string
+   phone: string
 }
 
 
@@ -26,4 +30,12 @@ export class EndpointInfoUpdateForm {
    subdomains: string[]
    ports: number[]
 
+}
+
+export class Contact {
+   name: string
+   email: string
+   address: string
+   phone: string
+   description: string
 }

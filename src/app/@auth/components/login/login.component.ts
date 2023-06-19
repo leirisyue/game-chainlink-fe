@@ -75,7 +75,8 @@ export class NgxLoginComponent implements OnInit {
       if (response.token) {
         this.authService.storeTokens(response)
         if (response.subject) {
-          this.router.navigate(['/home'], { replaceUrl: true })
+          this.authService.subject = Role.ADMIN
+          this.router.navigate(['/dashboard'], { replaceUrl: true })
         }
       } else {
         this.messageService.errorByText(response.subject)

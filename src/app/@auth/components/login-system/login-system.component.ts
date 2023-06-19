@@ -10,6 +10,7 @@ import { getDeepFromObject } from '../../helpers';
 import { MessageService } from '../../../@core/utils/message.service';
 import { CookieService } from 'ngx-cookie-service';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { Role } from '../../../@core/interfaces/enum';
 
 @Component({
   selector: 'ngx-login',
@@ -81,8 +82,8 @@ export class NgxLoginSystemComponent implements OnInit {
       // 
       if (response.token) {
         this.authService.storeTokens(response)
-        console.log(response.subject)
         if (response.subject) {
+          this.authService.subject = Role.SYSTEM
           this.router.navigate(['/dashboard'], { replaceUrl: true })
         }
       } else {

@@ -22,17 +22,14 @@ export class AuthService {
   ) { }
 
   generateSystemAccessToken(data: any): Observable<AccessToken> {
-    this.subject = Role.SYSTEM
     return this.api.post(this.path + '/system/access-token', data)
   }
 
   generateEndpointAccessToken(data: any): Observable<AccessToken> {
-    this.subject = Role.ADMIN
     return this.api.post(this.path + '/endpoint/access-token', data)
   }
 
   generateCustomerAccessToken(data: any): Observable<AccessToken> {
-    this.subject = Role.USER
     return this.api.post(this.path + '/customer/access-token', data)
   }
 
@@ -139,12 +136,6 @@ export class AuthService {
   }
 
   isRole(role: string): boolean {
-    if (!this.subject) {
-      this.subject = localStorage.getItem('Subject')
-    }
-    if (this.subject && this.subject !== Role.SYSTEM) {
-      this.subject = Role.USER
-    }
     try {
       return this.subject === role
     } catch (e) {

@@ -9,11 +9,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {
   NgxAuthComponent,
-  NgxLoginComponent, NgxRegisterComponent, NgxRequestPasswordComponent,
+  NgxLoginComponent,
   NgxResetPasswordComponent
 } from './components';
 import { NgxActivateAccountComponent } from './components/activate-account/activate-account.component';
 import { NgxCustomerComponent } from './components/login-customer/login-customer.component';
+import { NgxRegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [{
   path: '',
@@ -37,6 +38,11 @@ const routes: Routes = [{
     {
       path: 'login',
       component: NgxCustomerComponent
+      // data: { title: 'Login' },
+    },
+    {
+      path: 'register',
+      component: NgxRegisterComponent
       // data: { title: 'Login' },
     }
   ],

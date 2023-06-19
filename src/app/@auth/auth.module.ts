@@ -21,33 +21,28 @@ import { AuthInterceptor } from './auth.interceptor';
 import { authOptions } from './auth.settings';
 import {
   NgxAuthComponent, NgxLoginComponent,
-  NgxRegisterComponent,
-  NgxRequestPasswordComponent,
   NgxResetPasswordComponent
 } from './components';
 import { NgxActivateAccountComponent } from './components/activate-account/activate-account.component';
-import { RegisterBusinessComponent } from './components/register/register-business/register-business.component';
-import { RegisterUserComponent } from './components/register/register-user/register-user.component';
 import { CanActivateViaLoginGuard } from './login-guard';
 import { NbDateFnsDateModule } from '@nebular/date-fns';
 import { NgxCustomerComponent } from './components/login-customer/login-customer.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxRegisterComponent } from './components/register/register.component';
 
 const GUARDS = [AuthGuard, CanActivateViaLoginGuard];
 const COMPONENTS = [
   NgxLoginComponent,
   NgxAuthComponent,
-  NgxRegisterComponent,
-  RegisterUserComponent,
-  RegisterBusinessComponent,
-  NgxRequestPasswordComponent,
   NgxResetPasswordComponent,
   NgxActivateAccountComponent,
   NgxLoginSystemComponent,
+  NgxRegisterComponent,
   NgxCustomerComponent
 ];
 
 const NB_MODULES = [
+  FormsModule,
   NbIconModule,
   NbLayoutModule,
   NbCardModule,

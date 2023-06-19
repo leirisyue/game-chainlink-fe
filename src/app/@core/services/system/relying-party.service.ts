@@ -19,7 +19,7 @@ export class RelyingPartyService {
     return this.api.get(this.path)
   }
 
-  createRelyingParty(form: RelyingPartyDto): Observable<RelyingPartyDto> {
+  createRelyingParty(form: RelyingPartyUpdateForm): Observable<RelyingPartyDto> {
     return this.api.post(this.path, form)
   }
 

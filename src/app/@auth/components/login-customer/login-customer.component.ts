@@ -80,9 +80,10 @@ export class NgxCustomerComponent implements OnInit {
 
     this.authService.generateCustomerAccessToken(data).subscribe(response => {
       if (response.token) {
+        this.authService.subject = Role.USER
         this.authService.storeTokens(response)
         if (response.subject) {
-          this.router.navigate(['/home'], { replaceUrl: true })
+          this.router.navigate(['/dashboard'], { replaceUrl: true })
         }
       } else {
         this.messageService.errorByText(response.subject)

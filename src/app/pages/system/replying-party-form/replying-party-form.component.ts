@@ -15,6 +15,7 @@ import { MessageService } from '../../../@core/utils/message.service';
 export class ReplyingPartyFormComponent implements OnInit {
 
   @Input() data: RelyingPartyDto;
+  @Input() input: RelyingPartyUpdateForm = new RelyingPartyUpdateForm();
   @Input() view: boolean
   listPort: string
   listSub: string
@@ -30,6 +31,12 @@ export class ReplyingPartyFormComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.data && this.data.id) {
+      this.input.name = this.data.name
+      this.input.origin = this.data.origin
+      this.input.description = this.data.description
+      this.input.email = this.data.email
+      this.input.phone = this.data.phone
+
       if (this.data.ports?.length > 0) {
         this.listPort = ''
         this.listPort = this.data.ports.join(', ')
@@ -37,11 +44,11 @@ export class ReplyingPartyFormComponent implements OnInit {
     }
   }
 
-  async submit(form: RelyingPartyDto) {
+  async submit(form: RelyingPartyUpdateForm) {
     this.data?.id ? await this.update(form) : await this.create(form)
   }
 
-  private async create(form: RelyingPartyDto) {
+  private async create(form: RelyingPartyUpdateForm) {
     await this.relyingPartyService.createRelyingParty(form).toPromise()
       .then(res => {
         this.data = res

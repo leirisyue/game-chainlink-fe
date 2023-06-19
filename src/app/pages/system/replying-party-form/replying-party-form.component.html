@@ -26,29 +26,16 @@
                   </ngx-validation-message>
                </div>
                <div class="form-group col-sm-6" *ngIf="!view">
-                  <label class="label">{{'Global.ContactName' | translate}}</label>
-                  <input separatorNumber nbInput fullWidth min="0" required [(ngModel)]="input.contactName"
-                     name="contactName" #contactName="ngModel"
-                     [attr.aria-invalid]="contactName.invalid && contactName.touched ? true : null" [disabled]="view">
-               </div>
-               <div class="form-group col-sm-6" *ngIf="!view">
                   <label class="label">{{'Global.Email' | translate}}</label>
-                  <input separatorNumber nbInput fullWidth min="0" required [(ngModel)]="input.contactEmail"
-                     name="contactEmail" #contactEmail="ngModel"
-                     [attr.aria-invalid]="contactEmail.invalid && contactEmail.touched ? true : null" [disabled]="view">
-               </div>
-               <div class="form-group col-sm-6" *ngIf="!view">
-                  <label class="label">{{'Global.Address' | translate}} *</label>
-                  <input separatorNumber nbInput fullWidth min="0" required [(ngModel)]="input.contactAddress"
-                     name="contactAddress" #contactAddress="ngModel"
-                     [attr.aria-invalid]="contactAddress.invalid && contactAddress.touched ? true : null"
-                     [disabled]="view">
+                  <input separatorNumber nbInput fullWidth min="0" required [(ngModel)]="input.email"
+                     name="email" #email="ngModel"
+                     [attr.aria-invalid]="email.invalid && email.touched ? true : null" [disabled]="view">
                </div>
                <div class="form-group col-sm-6" *ngIf="!view">
                   <label class="label">{{'Global.Phone' | translate}} *</label>
-                  <input separatorNumber nbInput fullWidth min="0" required [(ngModel)]="input.contactPhone"
-                     name="contactPhone" #contactPhone="ngModel"
-                     [attr.aria-invalid]="contactPhone.invalid && contactPhone.touched ? true : null" [disabled]="view">
+                  <input separatorNumber nbInput fullWidth min="0" required [(ngModel)]="input.phone"
+                     name="phone" #phone="ngModel"
+                     [attr.aria-invalid]="phone.invalid && phone.touched ? true : null" [disabled]="view">
                </div>
                <div class="form-group col-sm-12" *ngIf="!view">
                   <label class="label">{{'Global.Description' | translate}}</label>
@@ -116,28 +103,10 @@
                               <mat-divider></mat-divider>
                               <div class="col-sm-12 row pt-2 pb-2">
                                  <div class="col-md-3 col-sm-12 text-md-right ">
-                                    {{'Global.ContactName' | translate}}
-                                 </div>
-                                 <div class="col-md-9 col-sm-12" style="line-break: anywhere;">
-                                    <label>{{data?.contact?.name}}</label>
-                                 </div>
-                              </div>
-                              <mat-divider></mat-divider>
-                              <div class="col-sm-12 row pt-2 pb-2">
-                                 <div class="col-md-3 col-sm-12 text-md-right ">
                                     {{'Global.Email' | translate}}
                                  </div>
                                  <div class="col-md-9 col-sm-12" style="line-break: anywhere;">
-                                    <label>{{data?.contact?.email}}</label>
-                                 </div>
-                              </div>
-                              <mat-divider></mat-divider>
-                              <div class="col-sm-12 row pt-2 pb-2">
-                                 <div class="col-md-3 col-sm-12 text-md-right ">
-                                    {{'Global.Address' | translate}}
-                                 </div>
-                                 <div class="col-md-9 col-sm-12" style="line-break: anywhere;">
-                                    <label>{{data?.contact?.address}}</label>
+                                    <label>{{data?.email}}</label>
                                  </div>
                               </div>
                               <mat-divider></mat-divider>
@@ -146,7 +115,7 @@
                                     {{'Global.Phone' | translate}}
                                  </div>
                                  <div class="col-md-9 col-sm-12" style="line-break: anywhere;">
-                                    <label>{{data?.contact?.phone}}</label>
+                                    <label>{{data?.phone}}</label>
                                  </div>
                               </div>
                               <mat-divider></mat-divider>

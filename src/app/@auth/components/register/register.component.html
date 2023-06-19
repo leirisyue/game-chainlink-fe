@@ -1,35 +1,67 @@
-<!-- <h3 id="title" class="title">{{'Button.Register' | translate}}</h3>
-
-<div aria-labelledby="title">
-  <h6>Thông tin cơ sở kinh doanh</h6>
-
-</div> -->
-
-<nb-card>
-  <nb-card-header>
-    <div class="col-sm-12">
-      <div class="row align-items-center">
-        <h3 class="text-uppercase">{{'Button.Register' | translate}}</h3>
-        <!-- <i class="fa fa fa-info-circle fs-13" *ngIf="_tab === 0"
-          nbTooltip="(Chọn từ ngày đến ngày) Liệt kê thời gian đăng nhập/đăng xuất trên hệ thống"></i> -->
-        <!-- <i class="fa fa fa-info-circle fs-13" *ngIf="_tab === 1"
-          nbTooltip="(Chọn từ ngày đến ngày) Liệt kê thời gian thực hiện các thao tác khác trên hệ thống"></i> -->
-      </div>
-    </div>
-  </nb-card-header>
-  <nb-card-body>
-    <div>
-      <nb-tabset fullWidth (changeTab)="changeTab($event)">
-        <nb-tab [tabId]="0" tabTitle="{{'Thông tin cơ sở kinh doanh' | translate}}"></nb-tab>
-        <nb-tab [tabId]="1" tabTitle="{{'Tài khoản nhân viên' | translate}}"></nb-tab>
-      </nb-tabset>
-    </div>
-    <span *ngIf="isBusiness">
-      <ngx-register-business></ngx-register-business>
-    </span>
-    <span *ngIf="isUser">
-      <ngx-register-user></ngx-register-user>
-    </span>
-  </nb-card-body>
-
-</nb-card>
+<form #form="ngForm" (ngSubmit)="submit(form.value)">
+   <nb-card class="modal-lg">
+      <nb-card-header>
+         <h5 class="primary">REGISTER ACCOUNT</h5>
+      </nb-card-header>
+      <nb-card-body>
+         <div class="row">
+            <div class="form-group col-sm-12">
+               <label class="label">{{'relying.enterprise'|translate}}</label>
+               <nb-select fullWidth [(ngModel)]="data.relyingPartyId" name="relyingPartyId" #relyingPartyId="ngModel">
+                  <nb-option *ngFor="let item of listReplyingParty" [value]="item.id">{{item.name}}</nb-option>
+               </nb-select>
+            </div>
+            <div class="form-group col-sm-12">
+               <label class="label">{{'Global.Username' | translate}} </label>
+               <input nbInput fullWidth [(ngModel)]="data.username" name="username" #username="ngModel">
+               <ngx-validation-message label="{{'Global.userLogin' | translate}}"
+                  [showRequired]="username?.errors?.required && username.touched">
+               </ngx-validation-message>
+            </div>
+            <div class="form-group col-sm-12">
+               <label class="label">{{'Global.displayName' | translate}} </label>
+               <input nbInput fullWidth [(ngModel)]="data.displayName" name="displayName" #displayName="ngModel">
+               <ngx-validation-message label="{{'Global.displayName' | translate}}"
+                  [showRequired]="displayName?.errors?.required && displayName.touched">
+               </ngx-validation-message>
+            </div>
+            <div class="form-group col-sm-12">
+               <label class="label">{{'Global.Password' | translate}} </label>
+               <nb-form-field>
+                  <input [type]="getInputType()" nbInput fullWidth id="input-password" [(ngModel)]="data.password"
+                     name="password" #password="ngModel"
+                     [status]="password.dirty ? (password.invalid  ? 'danger' : 'success') : 'basic'">
+                  <button nbSuffix nbButton ghost (click)="toggleShowPassword()" type="button">
+                     <nb-icon [icon]="showPassword ? 'eye-outline' : 'eye-off-2-outline'" pack="eva"
+                        [attr.aria-label]="showPassword ? 'hide password' : 'show password'">
+                     </nb-icon>
+                  </button>
+               </nb-form-field>
+               <ngx-validation-message label="{{'Global.Password' | translate}}"
+                  [showRequired]="password?.errors?.required && password.touched">
+               </ngx-validation-message>
+            </div>
+            <div class="form-group col-sm-12">
+               <label class="label">{{'Global.Re-Password' | translate}} </label>
+               <nb-form-field>
+                  <input [type]="getInputType()" nbInput fullWidth id="input-password" [(ngModel)]="data.rePassword"
+                     name="rePassword" #rePassword="ngModel"
+                     [status]="rePassword.dirty ? (rePassword.invalid  ? 'danger' : 'success') : 'basic'">
+                  <button nbSuffix nbButton ghost (click)="toggleShowPassword()" type="button">
+                     <nb-icon [icon]="showPassword ? 'eye-outline' : 'eye-off-2-outline'" pack="eva"
+                        [attr.aria-label]="showPassword ? 'hide password' : 'show password'">
+                     </nb-icon>
+                  </button>
+               </nb-form-field>
+               <ngx-validation-message label="{{'Global.Password' | translate}}"
+                  [showRequired]="password?.errors?.required && password.touched">
+               </ngx-validation-message>
+            </div>
+         </div>
+      </nb-card-body>
+      <nb-card-footer>
+         <button type="submit" nbButton hero class="float-right ml-2"
+            status="primary">{{'Button.Save'|translate}}</button>
+      </nb-card-footer>
+   </nb-card>
+</form>

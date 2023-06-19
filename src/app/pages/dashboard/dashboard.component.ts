@@ -57,6 +57,8 @@ export class DashboardComponent implements OnInit {
   }
 
   async ngOnInit() {
+
+    console.log("🚀 ~ ngOnInit ~ this.authService.subject:", this.authService.subject);
     if (this.authService.subject == Role.ADMIN) {
       await this.getInfo()
       await this.getServiceLicense()

@@ -23,7 +23,7 @@
     "Updated": "Ngày cập nhật",
     "Time": "Thời gian",
     "expiration": "Ngày hết hạn",
-    "createdDate": "Ngày tạo",
+    "createdDate": "Created Date",
     "activatedDate": "Ngày kích hoạt",
     "lastAccess": "Truy cập cuối"
   },
@@ -39,7 +39,7 @@
     "Password": "Password",
     "Email": "Email",
     "Option": "Chức năng",
-    "Description": "Mô tả",
+    "Description": "Description",
     "Search": "Tìm kiếm",
     "Role": "Quyền",
     "Status": "Trạng thái",
@@ -63,7 +63,7 @@
     "Setting": "Cài đặt",
     "FileName": "Tên tập tin",
     "Subject": "Tiêu đề",
-    "Phone": "Số điện thoại",
+    "Phone": "Phone number",
     "To": "đến",
     "Website": "Website",
     "TaxCode": "Mã số thuế",
@@ -86,9 +86,11 @@
     "FEMALE": "Nữ",
     "userLogin": "Tên đăng nhập",
     "userEmail": "Email",
-    "displayName": "Tên hiển thị",
+    "displayName": "Display name",
     "Id": "ID",
-    "ContactName": "Tên liên hệ"
+    "ContactName": "Tên liên hệ",
+    "Re-Password": "Re-Password",
+    "Username": "User name"
   },
   "Message": {
     "Success": "Thành công",
@@ -139,7 +141,7 @@
     "SignIn": "Log in",
     "SignOut": "Đăng xuất",
     "Close": "Đóng",
-    "Save": "Lưu",
+    "Save": "Save",
     "DeselectAll": "Bỏ chọn tất cả",
     "SelectAll": "Chọn tất cả",
     "Delete": "Xóa",
@@ -252,10 +254,10 @@
   "relying": {
     "relyingTable": "Danh sách khách hàng",
     "relying-party": "Khách hàng",
-    "secret": "Mã bảo mật",
+    "secret": "Secret ID",
     "origin": "URL",
     "ports": "Ports",
-    "subdomains": "Tên miền phụ",
+    "subdomains": "Subdomains",
     "ID": "ID",
     "origins": "Origins",
     "enterprise": "Enterprise"
