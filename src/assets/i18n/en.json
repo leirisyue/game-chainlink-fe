@@ -145,6 +145,15 @@
   "LogType": {
     "SYSTEM": "System",
     "PERSONAL": "Personal"
+  },
+  "packages": {
+    "userAccounts": "User Accounts",
+    "userAuthenticators": "User Authenticators",
+    "createdPackages": "Created Packages",
+    "activatedPackages": "Activated Packages"
+  },
+  "relying": {
+    "subdomains": "Subdomains"
   }
 
 }

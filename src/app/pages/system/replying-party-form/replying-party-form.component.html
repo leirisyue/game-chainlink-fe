@@ -9,23 +9,50 @@
             <div class="row">
                <div class="form-group col-sm-12" *ngIf="!view">
                   <label class="label">{{'Global.Name' | translate}} *</label>
-                  <input nbInput fullWidth maxlength="200" [(ngModel)]="data.name" name="name" #name="ngModel"
+                  <input nbInput fullWidth maxlength="200" [(ngModel)]="input.name" name="name" #name="ngModel"
                      [disabled]="view">
-                  <ngx-validation-message label="name" [showRequired]="name?.errors?.required && name.touched">
+                  <ngx-validation-message label="{{'Global.Name' | translate}}"
+                     [showRequired]="name?.errors?.required && name.touched">
                   </ngx-validation-message>
                </div>
                <div class="form-group col-sm-12" *ngIf="!view">
                   <label class="label">{{'relying.origin' | translate}} *</label>
                   <div><small>({{'Message.https'|translate}})</small></div>
-                  <input separatorNumber nbInput fullWidth min="0" required [(ngModel)]="data.origin" name="origin"
+                  <input separatorNumber nbInput fullWidth min="0" required [(ngModel)]="input.origin" name="origin"
                      #origin="ngModel" [attr.aria-invalid]="origin.invalid && origin.touched ? true : null"
                      [disabled]="view">
-                  <ngx-validation-message label="origin" [showRequired]="origin?.errors?.required && origin.touched">
+                  <ngx-validation-message label="{{'relying.origin' | translate}}"
+                     [showRequired]="origin?.errors?.required && origin.touched">
                   </ngx-validation-message>
+               </div>
+               <div class="form-group col-sm-6" *ngIf="!view">
+                  <label class="label">{{'Global.ContactName' | translate}}</label>
+                  <input separatorNumber nbInput fullWidth min="0" required [(ngModel)]="input.contactName"
+                     name="contactName" #contactName="ngModel"
+                     [attr.aria-invalid]="contactName.invalid && contactName.touched ? true : null" [disabled]="view">
+               </div>
+               <div class="form-group col-sm-6" *ngIf="!view">
+                  <label class="label">{{'Global.Email' | translate}}</label>
+                  <input separatorNumber nbInput fullWidth min="0" required [(ngModel)]="input.contactEmail"
+                     name="contactEmail" #contactEmail="ngModel"
+                     [attr.aria-invalid]="contactEmail.invalid && contactEmail.touched ? true : null" [disabled]="view">
+               </div>
+               <div class="form-group col-sm-6" *ngIf="!view">
+                  <label class="label">{{'Global.Address' | translate}} *</label>
+                  <input separatorNumber nbInput fullWidth min="0" required [(ngModel)]="input.contactAddress"
+                     name="contactAddress" #contactAddress="ngModel"
+                     [attr.aria-invalid]="contactAddress.invalid && contactAddress.touched ? true : null"
+                     [disabled]="view">
+               </div>
+               <div class="form-group col-sm-6" *ngIf="!view">
+                  <label class="label">{{'Global.Phone' | translate}} *</label>
+                  <input separatorNumber nbInput fullWidth min="0" required [(ngModel)]="input.contactPhone"
+                     name="contactPhone" #contactPhone="ngModel"
+                     [attr.aria-invalid]="contactPhone.invalid && contactPhone.touched ? true : null" [disabled]="view">
                </div>
                <div class="form-group col-sm-12" *ngIf="!view">
                   <label class="label">{{'Global.Description' | translate}}</label>
-                  <textarea nbInput fullWidth maxlength="1000" [(ngModel)]="data.description" name="description"
+                  <textarea nbInput fullWidth maxlength="1000" [(ngModel)]="input.description" name="description"
                      #description="ngModel" [disabled]="view"></textarea>
                </div>
                <div class="col-sm-12">
@@ -80,10 +107,46 @@
                               <mat-divider></mat-divider>
                               <div class="col-sm-12 row pt-2 pb-2">
                                  <div class="col-md-3 col-sm-12 text-md-right ">
-                                    {{'relying.origins' | translate}}
+                                    {{'relying.subdomains' | translate}}
                                  </div>
                                  <div class="col-md-9 col-sm-12" style="line-break: anywhere;">
                                     <label>{{listSub}}</label>
+                                 </div>
+                              </div>
+                              <mat-divider></mat-divider>
+                              <div class="col-sm-12 row pt-2 pb-2">
+                                 <div class="col-md-3 col-sm-12 text-md-right ">
+                                    {{'Global.ContactName' | translate}}
+                                 </div>
+                                 <div class="col-md-9 col-sm-12" style="line-break: anywhere;">
+                                    <label>{{data?.contact?.name}}</label>
+                                 </div>
+                              </div>
+                              <mat-divider></mat-divider>
+                              <div class="col-sm-12 row pt-2 pb-2">
+                                 <div class="col-md-3 col-sm-12 text-md-right ">
+                                    {{'Global.Email' | translate}}
+                                 </div>
+                                 <div class="col-md-9 col-sm-12" style="line-break: anywhere;">
+                                    <label>{{data?.contact?.email}}</label>
+                                 </div>
+                              </div>
+                              <mat-divider></mat-divider>
+                              <div class="col-sm-12 row pt-2 pb-2">
+                                 <div class="col-md-3 col-sm-12 text-md-right ">
+                                    {{'Global.Address' | translate}}
+                                 </div>
+                                 <div class="col-md-9 col-sm-12" style="line-break: anywhere;">
+                                    <label>{{data?.contact?.address}}</label>
+                                 </div>
+                              </div>
+                              <mat-divider></mat-divider>
+                              <div class="col-sm-12 row pt-2 pb-2">
+                                 <div class="col-md-3 col-sm-12 text-md-right ">
+                                    {{'Global.Phone' | translate}}
+                                 </div>
+                                 <div class="col-md-9 col-sm-12" style="line-break: anywhere;">
+                                    <label>{{data?.contact?.phone}}</label>
                                  </div>
                               </div>
                               <mat-divider></mat-divider>

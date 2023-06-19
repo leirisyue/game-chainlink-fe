@@ -98,7 +98,7 @@ export class PackagesComponent implements OnInit {
       if (data) {
         for (const packages of data.packages) {
           if (packages.type === PackageType.TIME) {
-            packages.typeLicense = humanizeDuration(packages.amount, { largest: 2, language: 'vi', units: ["y", "mo", "d", "h", "m", "s"], round: true });
+            packages.amountTime = humanizeDuration(packages.amount, { largest: 2, language: 'vi', units: ["y", "mo", "d", "h", "m", "s"], round: true });
           }
         }
         this.servicePackageDto = data
@@ -113,7 +113,7 @@ export class PackagesComponent implements OnInit {
         data = data.sort((a, b) => new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime())
         for (const packages of data) {
           if (packages.type === PackageType.TIME) {
-            packages.typeLicense = humanizeDuration(packages.amount, { largest: 2, language: 'vi', units: ["y", "mo", "d", "h", "m", "s"], round: true });
+            packages.amountTime = humanizeDuration(packages.amount, { largest: 2, language: 'vi', units: ["y", "mo", "d", "h", "m", "s"], round: true });
           }
         }
         this.dataSource.sort = this.sort
@@ -130,6 +130,7 @@ export class PackagesComponent implements OnInit {
       closeOnBackdropClick: false,
     });
     dialogRef.onClose.subscribe((data) => {
+      console.log("🚀 ~ dialogRef.onClose.subscribe ~ data:", data);
       if (data.relyingPartyId) {
         this.idReplyingParty = data.relyingPartyId
         this.changeReplyingParty(data.relyingPartyId)

@@ -122,18 +122,18 @@
                </ng-container>
                <ng-container matColumnDef="amount">
                   <th *matHeaderCellDef mat-header-cell mat-sort-header>{{'packages.amount' | translate}}</th>
-                  <td *matCellDef="let item" mat-cell nbTooltip="{{item.amount}}">
+                  <td *matCellDef="let item" mat-cell>
                      <span *ngIf="item.type !== 'TIME'">
                         {{item.amount | separator}}
                      </span>
                      <span *ngIf="item.type === 'TIME'">
-                        {{ item?.typeLicense }}
+                        {{ item?.amountTime }}
                      </span>
                   </td>
                </ng-container>
                <ng-container matColumnDef="type">
                   <th *matHeaderCellDef mat-header-cell mat-sort-header>{{'Global.Type' | translate}}</th>
-                  <td *matCellDef="let item" mat-cell nbTooltip="{{item?.type}}">
+                  <td *matCellDef="let item" mat-cell >
                      {{'packages.' +item?.type | translate}}</td>
                </ng-container>
                <ng-container matColumnDef="createdDate">
@@ -154,7 +154,6 @@
                <ng-container matColumnDef="option">
                   <th *matHeaderCellDef mat-header-cell>{{'Global.Option' | translate}}</th>
                   <td *matCellDef="let item" mat-cell>
-
                      <div style="right: 0;">
                         <button nbButton ghost [matMenuTriggerFor]="menuUserAuth" *ngIf="!item.activatedDate">
                            <nb-icon icon="more-vertical-outline"></nb-icon>
@@ -177,7 +176,7 @@
                <ng-container matColumnDef="select">
                   <th mat-header-cell *matHeaderCellDef>
                      <div *ngIf="dataSource.filteredData.length > 1">
-                        <input type="checkbox" (change)="$event ? masterToggle() : null" 6
+                        <input type="checkbox" (change)="$event ? masterToggle() : null"
                            [checked]="selection.hasValue() && isAllSelected()"
                            [indeterminate]="selection.hasValue() && !isAllSelected()">
                         <i class="fa fa-angle-down cursor-pointer ml-1" [matMenuTriggerFor]="menu"></i>
@@ -218,11 +217,4 @@
          {{'Message.NoData' | translate}}
       </div>
    </nb-card-body>
-   <!-- <nb-card-footer>
-      <div class="col-sm-12 text-right" *ngIf="idReplyingParty">
-         <button type="button" nbButton (click)="close()">{{'Button.Inactive' | translate}}</button>
-         <button type="button" nbButton hero class="ml-2" status="primary" (click)="updateRelyingPartyStatusActive()" >{{'Button.Active' |
-            translate}}</button>
-      </div>
-   </nb-card-footer> -->
 </nb-card>

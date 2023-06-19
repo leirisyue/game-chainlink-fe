@@ -38,16 +38,7 @@ export class UsersFormComponent implements OnInit {
     await this.usersService.createUserAccount(form).toPromise()
       .then(() => this.messageService.successByType(CREATE))
   }
-  //--------------------------------------------------------------------------------------------
-  // private async update(form: PackageDto) {
-  //   await this.usersService.updateRelyingPartyPackage(form, this.data.id).toPromise()
-  //     .then(() => {
-  //       this.messageService.successByType(UPDATE),
-  //         this.close() 
-  //     }
-  //     )
-  // }
-  //--------------------------------------------------------------------------------------------
+
   showPassword = false;
 
   getInputType() {
@@ -60,7 +51,7 @@ export class UsersFormComponent implements OnInit {
   toggleShowPassword() {
     this.showPassword = !this.showPassword;
   }
-  //--------------------------------------------------------------------------------------------
+
   close() {
     this.ref.close(this.data);
   }

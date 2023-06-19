@@ -1,15 +1,16 @@
-.img-title{
+.img-title {
    position: absolute;
-   top: 183px;
+   top: 80px;
    width: 300px;
    left: 50px;
    bottom: 0;
 }
+
 figure {
-   width: 500px;
+   width: 450px;
+   height: 200px;
    aspect-ratio: 8 / 5;
    --bg: hsl(330 80% calc(90% - (var(--hover) * 10%)));
-   --accent: hsl(280 80% 40%);
    transition: background 0.2s;
    background:
       radial-gradient(circle at top left, var(--accent), transparent 75%),
@@ -19,6 +20,19 @@ figure {
    overflow: hidden;
    border-radius: 1.5rem;
 }
+
+figure.accent {
+   --accent: hsl(18, 80%, 40%);
+}
+
+figure.primary {
+   --accent: hsl(229, 80%, 40%);
+}
+
+figure.info {
+   --accent: hsl(280 80% 40%);
+}
+
 
 figure:after {
    content: "";

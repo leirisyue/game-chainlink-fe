@@ -302,10 +302,35 @@
 
 <!-- ------------------------------------------ customer works -------------------------------------------------->
 <span *ngIf="authService.subject === role.USER">
-   <article style="position: relative;" (click)="routerNav('/pages/user/game')">
-      <figure><img src="https://upload.wikimedia.org/wikipedia/commons/2/22/Tibetian_Wheel.gif" alt=""></figure>
-      <div class="title">
-         <img src="../../../assets/images/vong-quay.png" class="img-title" />
+   <div class="col-sm-12">
+      <div class="row">
+         <div class="col-sm-6 pt-3">
+            <article style="position: relative;" (click)="routerNav('/pages/user/game')">
+               <figure class="accent"><img src="https://upload.wikimedia.org/wikipedia/commons/2/22/Tibetian_Wheel.gif" alt=""></figure>
+               <div class="title">
+                  <img src="../../../assets/images/wheel.png" class="img-title" />
+               </div>
+            </article>
+         </div>
+         <div class="col-sm-6 pt-3">
+            <article style="position: relative;" (click)="routerNav('/pages/user/puzzle-game')">
+               <figure class="primary"><img src="../../../assets/images/puzzle.gif" alt=""></figure>
+               <div class="title">
+                  <img src="../../../assets/images/puzzle.png" class="img-title" />
+               </div>
+            </article>
+         </div>
+         <div class="col-sm-6 pt-3">
+            <article style="position: relative;" (click)="routerNav('/pages/user/memory-game')">
+               <figure class="info"><img src="../../../assets/images/card.gif" alt=""></figure>
+               <div class="title">
+                  <img src="../../../assets/images/memory.png" class="img-title" />
+               </div>
+            </article>
+         </div>
       </div>
-   </article>
+   </div>
+
+
+
 </span>

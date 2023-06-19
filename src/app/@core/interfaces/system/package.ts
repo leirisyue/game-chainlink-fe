@@ -9,6 +9,7 @@ export class PackageDto {
    description: string
    relyingPartyId: string
    typeLicense?: string
+   amountTime?: string
 }
 
 export class ServicePackageDto {
