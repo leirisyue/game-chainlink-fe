@@ -16,3 +16,19 @@ Công nghệ sử dụng:
 Kiến trúc nLayers-nTiers
 Web API : Resful API
 Tạo số ngẫu nhiên trên Blockchain => ChainLink (Web Service)
+
+
+
+
+
+# Back-end 
+- java application - CDK 17.0
+- api restful
+
+# Front-end
+- angular ver. 14
+
+# Role
+- SuperAdmin
+- Admin
+- User
